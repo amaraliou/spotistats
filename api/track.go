@@ -29,3 +29,12 @@ type TrackList struct {
 	Previous string      `json:"previous"`
 	Total    int         `json:"total"`
 }
+
+func GetTrack(trackID string) (track FullTrack, err error) {
+	r := buildReq("GET", BaseURL+"tracks/"+trackID, nil, nil)
+	r.Header.Add("Authorization", "Bearer "+token.AccessToken)
+
+	err = makeReq(r, &track)
+
+	return track, err
+}
