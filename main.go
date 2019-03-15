@@ -9,15 +9,14 @@ import (
 
 func main() {
 	api.Authenticate("", "")
-	a, err := api.GetArtist("6oMuImdp5ZcFhWP0ESe6mG")
+	track, err := api.GetTrack("5jwnLyVoVAxANd9cVYjHws")
 
 	if err != nil {
 		log.Fatal(err)
 	}
 
-	fmt.Printf("\n%s\n", a.Name)
-	fmt.Printf("\n%s\n", a.Href)
-	fmt.Printf("\n%d\n", a.Popularity)
-	fmt.Printf("\n%s\n", a.URI)
-	fmt.Printf("\n%s\n", a.ID)
+	fmt.Printf("Track: %s\n", track.Name)
+	fmt.Printf("Artist: %s\n", track.Artists[0].Name)
+	fmt.Printf("Album: %s\n", track.Album.Name)
+	fmt.Printf("Duration: %s\n", api.MillisecsToSongTime(track.Duration))
 }
