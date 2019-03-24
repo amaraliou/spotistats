@@ -2,6 +2,26 @@ package api
 
 import "net/http"
 
+type TopTracks struct {
+	Href     string      `json:"href"`
+	Items    []FullTrack `json:"items"`
+	Limit    int         `json:"limit"`
+	Next     string      `json:"next"`
+	Offset   int         `json:"offset"`
+	Previous string      `json:"previous"`
+	Total    int         `json:"total"`
+}
+
+type TopArtists struct {
+	Href     string       `json:"href"`
+	Items    []FullArtist `json:"items"`
+	Limit    int          `json:"limit"`
+	Next     string       `json:"next"`
+	Offset   int          `json:"offset"`
+	Previous string       `json:"previous"`
+	Total    int          `json:"total"`
+}
+
 //To add offset and limit (optionals)
 func GetSavedAlbums() (savedAlbums SavedAlbumList, err error) {
 
