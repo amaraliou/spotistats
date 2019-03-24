@@ -2,6 +2,7 @@ package api
 
 import (
 	"net/http"
+	"strings"
 )
 
 type Followers struct {
@@ -77,6 +78,16 @@ func GetArtist(artistID string) (artist FullArtist, err error) {
 
 	err = makeReq(r, &artist)
 	return artist, err
+}
+
+func GetMultipleArtists(artistIDs ...string) (artists FullArtists, err error) {
+	IDs := strings.Join(artistIDs, ",")
+	r := buildReq("GET", BaseURL+"artists/?ids="+IDs, nil, nil)
+	r.Header.Add("Authorization", "Bearer "+token.AccessToken)
+
+	err = makeReq(r, &artists)
+
+	return artists, err
 }
 
 func GetArtistTopTracks(artistID string) (topTracks FullTracks, err error) {
