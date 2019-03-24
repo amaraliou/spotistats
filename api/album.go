@@ -81,6 +81,7 @@ func GetMultipleAlbums(albumIDs ...string) (albums FullAlbums, err error) {
 	return albums, err
 }
 
+//To add offset and limit (optionals)
 func GetAlbumTracks(albumID string) (tracksPage TrackList, err error) {
 
 	r := buildReq("GET", BaseURL+"albums/"+albumID+"/tracks", nil, nil)
