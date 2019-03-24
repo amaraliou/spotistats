@@ -1,5 +1,7 @@
 package api
 
+import "strings"
+
 type BaseTrack struct {
 	Artists      []BaseArtist      `json:"artists"`
 	Markets      []string          `json:"available_markets"`
@@ -30,6 +32,10 @@ type TrackList struct {
 	Total    int         `json:"total"`
 }
 
+type FullTracks struct {
+	Tracks []FullTrack `json:"tracks"`
+}
+
 func GetTrack(trackID string) (track FullTrack, err error) {
 	r := buildReq("GET", BaseURL+"tracks/"+trackID, nil, nil)
 	r.Header.Add("Authorization", "Bearer "+token.AccessToken)
@@ -37,4 +43,14 @@ func GetTrack(trackID string) (track FullTrack, err error) {
 	err = makeReq(r, &track)
 
 	return track, err
+}
+
+func GetTracks(trackIDs ...string) (tracks FullTracks, err error) {
+	IDs := strings.Join(trackIDs, ",")
+	r := buildReq("GET", BaseURL+"tracks/?ids="+IDs, nil, nil)
+	r.Header.Add("Authorization", "Bearer "+token.AccessToken)
+
+	err = makeReq(r, &tracks)
+
+	return tracks, err
 }
