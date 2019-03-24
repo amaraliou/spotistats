@@ -59,3 +59,21 @@ func GetNextSavedTracks(url string) (savedTracks SavedTrackList, err error) {
 	err = makeReq(r, &savedTracks)
 	return savedTracks, err
 }
+
+func GetTopTracks(timeRange string) (topTracks TopTracks, err error) {
+
+	r := buildReq("GET", BaseURL+"me/top/tracks?time_range="+timeRange, nil, nil)
+	r.Header.Add("Authorization", "Bearer "+token.AccessToken)
+
+	err = makeReq(r, &topTracks)
+	return topTracks, err
+}
+
+func GetNextTopTracks(url string) (topTracks TopTracks, err error) {
+
+	r, err := http.NewRequest("GET", url, nil)
+	r.Header.Add("Authorization", "Bearer "+token.AccessToken)
+
+	err = makeReq(r, &topTracks)
+	return topTracks, err
+}
