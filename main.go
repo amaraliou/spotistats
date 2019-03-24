@@ -9,13 +9,15 @@ import (
 
 func main() {
 	api.Authenticate("", "")
-	topTracks, err := api.GetTopTracks("medium_term")
+	topTracks, err := api.GetTopTracks()
 
 	if err != nil {
 		log.Fatal(err)
 	}
 
+	fmt.Printf("\nTOP TRACKS:\n")
 	for _, track := range topTracks.Items {
 		fmt.Printf("\n%s", track.Name)
 	}
+	fmt.Printf("\n")
 }

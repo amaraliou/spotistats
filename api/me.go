@@ -60,9 +60,9 @@ func GetNextSavedTracks(url string) (savedTracks SavedTrackList, err error) {
 	return savedTracks, err
 }
 
-func GetTopTracks(timeRange string) (topTracks TopTracks, err error) {
+func GetTopTracks() (topTracks TopTracks, err error) {
 
-	r := buildReq("GET", BaseURL+"me/top/tracks?time_range="+timeRange, nil, nil)
+	r := buildReq("GET", BaseURL+"me/top/tracks", nil, nil)
 	r.Header.Add("Authorization", "Bearer "+token.AccessToken)
 
 	err = makeReq(r, &topTracks)
@@ -78,9 +78,9 @@ func GetNextTopTracks(url string) (topTracks TopTracks, err error) {
 	return topTracks, err
 }
 
-func GetTopArtists(timeRange string) (topArtists TopArtists, err error) {
+func GetTopArtists() (topArtists TopArtists, err error) {
 
-	r := buildReq("GET", BaseURL+"me/top/artists?time_range="+timeRange, nil, nil)
+	r := buildReq("GET", BaseURL+"me/top/artists", nil, nil)
 	r.Header.Add("Authorization", "Bearer "+token.AccessToken)
 
 	err = makeReq(r, &topArtists)
