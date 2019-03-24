@@ -55,3 +55,12 @@ type SavedAlbumList struct {
 	Previous string       `json:"previous"`
 	Total    int          `json:"total"`
 }
+
+func GetAlbum(albumID string) (album FullAlbum, err error) {
+
+	r := buildReq("GET", BaseURL+"albums/"+albumID, nil, nil)
+	r.Header.Add("Authorization", "Bearer "+token.AccessToken)
+
+	err = makeReq(r, &album)
+	return album, err
+}
