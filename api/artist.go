@@ -74,3 +74,12 @@ func GetArtist(artistID string) (artist FullArtist, err error) {
 	err = makeReq(r, &artist)
 	return artist, err
 }
+
+func GetArtistTopTracks(artistID string) (topTracks FullTracks, err error) {
+
+	r := buildReq("GET", BaseURL+"artists/"+artistID+"/top-tracks?country=GB", nil, nil)
+	r.Header.Add("Authorization", "Bearer "+token.AccessToken)
+
+	err = makeReq(r, &topTracks)
+	return topTracks, err
+}
