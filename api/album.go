@@ -1,6 +1,9 @@
 package api
 
-import "time"
+import (
+	"strings"
+	"time"
+)
 
 type BaseAlbum struct {
 	AlbumType    string            `json:"album"`
@@ -29,6 +32,10 @@ type FullAlbum struct {
 	Label                string      `json:"label"`
 	Genres               []string    `json:"genres"`
 	Copyrights           []Copyright `json:"copyrights"`
+}
+
+type FullAlbums struct {
+	Albums []FullAlbum `json:"albums"`
 }
 
 type SavedAlbum struct {
@@ -63,4 +70,13 @@ func GetAlbum(albumID string) (album FullAlbum, err error) {
 
 	err = makeReq(r, &album)
 	return album, err
+}
+
+func GetMultipleAlbums(albumIDs ...string) (albums FullAlbums, err error) {
+	IDs := strings.Join(albumIDs, ",")
+	r := buildReq("GET", BaseURL+"albums/?ids="+IDs, nil, nil)
+	r.Header.Add("Authorization", "Bearer "+token.AccessToken)
+
+	err = makeReq(r, &albums)
+	return albums, err
 }
