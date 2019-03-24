@@ -77,3 +77,21 @@ func GetNextTopTracks(url string) (topTracks TopTracks, err error) {
 	err = makeReq(r, &topTracks)
 	return topTracks, err
 }
+
+func GetTopArtists(timeRange string) (topArtists TopArtists, err error) {
+
+	r := buildReq("GET", BaseURL+"me/top/artists?time_range="+timeRange, nil, nil)
+	r.Header.Add("Authorization", "Bearer "+token.AccessToken)
+
+	err = makeReq(r, &topArtists)
+	return topArtists, err
+}
+
+func GetNextTopArtists(url string) (topArtists TopArtists, err error) {
+
+	r, err := http.NewRequest("GET", url, nil)
+	r.Header.Add("Authorization", "Bearer "+token.AccessToken)
+
+	err = makeReq(r, &topArtists)
+	return topArtists, err
+}
