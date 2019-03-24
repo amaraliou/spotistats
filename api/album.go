@@ -15,6 +15,22 @@ type BaseAlbum struct {
 	Name         string            `json:"name"`
 }
 
+type Copyright struct {
+	Text string `json:"text"`
+	Type string `json:"type"`
+}
+
+type FullAlbum struct {
+	BaseAlbum
+	Tracks               []BaseTrack `json:"tracks"`
+	ReleaseDate          string      `json:"release_date"`
+	ReleaseDatePrecision string      `json:"release_date_precision"`
+	Popularity           int         `json:"popularity"`
+	Label                string      `json:"label"`
+	Genres               []string    `json:"genres"`
+	Copyrights           []Copyright `json:"copyrights"`
+}
+
 type SavedAlbum struct {
 	AddedAt *time.Time `json:"added_at"`
 	Album   BaseAlbum  `json:"album"`
