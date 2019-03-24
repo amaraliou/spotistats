@@ -1,6 +1,9 @@
 package api
 
-import "strings"
+import (
+	"strings"
+	"time"
+)
 
 type BaseTrack struct {
 	Artists      []BaseArtist      `json:"artists"`
@@ -20,6 +23,21 @@ type FullTrack struct {
 	BaseTrack
 	Album      *BaseAlbum `json:"album"`
 	Popularity int        `json:"popularity"`
+}
+
+type SavedTrack struct {
+	AddedAt *time.Time `json:"added_at"`
+	Track   BaseTrack  `json:"track"`
+}
+
+type SavedTrackList struct {
+	Href     string       `json:"href"`
+	Items    []SavedTrack `json:"items"`
+	Limit    int          `json:"limit"`
+	Next     string       `json:"next"`
+	Offset   int          `json:"offset"`
+	Previous string       `json:"previous"`
+	Total    int          `json:"total"`
 }
 
 type TrackList struct {
