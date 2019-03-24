@@ -80,3 +80,12 @@ func GetMultipleAlbums(albumIDs ...string) (albums FullAlbums, err error) {
 	err = makeReq(r, &albums)
 	return albums, err
 }
+
+func GetAlbumTracks(albumID string) (tracksPage TrackList, err error) {
+
+	r := buildReq("GET", BaseURL+"albums/"+albumID+"/tracks", nil, nil)
+	r.Header.Add("Authorization", "Bearer "+token.AccessToken)
+
+	err = makeReq(r, &tracksPage)
+	return tracksPage, err
+}

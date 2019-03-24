@@ -24,7 +24,7 @@ type FullTrack struct {
 
 type TrackList struct {
 	Href     string      `json:"href"`
-	Items    []FullTrack `json:"items"`
+	Items    []BaseTrack `json:"items"`
 	Limit    int         `json:"limit"`
 	Next     string      `json:"next"`
 	Offset   int         `json:"offset"`
