@@ -36,6 +36,10 @@ type FullArtist struct {
 	Followers    *Followers        `json:"followers"`
 }
 
+type FullArtists struct {
+	Artists []FullArtist `json:"artists"`
+}
+
 type ArtistList struct {
 	Href     string       `json:"href"`
 	Items    []FullArtist `json:"items"`
@@ -82,4 +86,13 @@ func GetArtistTopTracks(artistID string) (topTracks FullTracks, err error) {
 
 	err = makeReq(r, &topTracks)
 	return topTracks, err
+}
+
+func GetArtistRelatedArtists(artistID string) (relatedArtists FullArtists, err error) {
+
+	r := buildReq("GET", BaseURL+"artists/"+artistID+"/related-artists", nil, nil)
+	r.Header.Add("Authorization", "Bearer "+token.AccessToken)
+
+	err = makeReq(r, &relatedArtists)
+	return relatedArtists, err
 }
