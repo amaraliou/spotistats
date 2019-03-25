@@ -31,6 +31,12 @@ type TopArtists struct {
 	Total    int          `json:"total"`
 }
 
+type AllTopArtists struct {
+	Short  TopArtists `json:"short_term"`
+	Medium TopArtists `json:"medium_term"`
+	Long   TopArtists `json:"long_term"`
+}
+
 //To add offset and limit (optionals)
 func GetSavedAlbums() (savedAlbums SavedAlbumList, err error) {
 
@@ -136,4 +142,13 @@ func GetNextTopArtists(url string) (topArtists TopArtists, err error) {
 
 	err = makeReq(r, &topArtists)
 	return topArtists, err
+}
+
+func GetAllTopArtists() (allTopArtists AllTopArtists, err error) {
+
+	allTopArtists.Short, err = GetTopArtists("short_term", 50, 0)
+	allTopArtists.Medium, err = GetTopArtists("medium_term", 50, 0)
+	allTopArtists.Long, err = GetTopArtists("long_term", 50, 0)
+
+	return allTopArtists, err
 }
