@@ -37,6 +37,22 @@ type AllTopArtists struct {
 	Long   TopArtists `json:"long_term"`
 }
 
+//To edit datetime object for Birthdate
+type UserInfo struct {
+	DisplayName  string            `json:"display_name"`
+	Birthdate    string            `json:"birthdate"`
+	Country      string            `json:"country"`
+	Email        string            `json:"email"`
+	ExternalURLS map[string]string `json:"external_urls"`
+	Href         string            `json:"href"`
+	ID           string            `json:"id"`
+	Followers    Followers         `json:"followers"`
+	Images       []Image           `json:"images"`
+	Product      string            `json:"product"`
+	Type         string            `json:"type"`
+	URI          string            `json:"uri"`
+}
+
 //To add offset and limit (optionals)
 func GetSavedAlbums() (savedAlbums SavedAlbumList, err error) {
 
