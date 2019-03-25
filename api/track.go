@@ -1,6 +1,7 @@
 package api
 
 import (
+	"strconv"
 	"strings"
 	"time"
 )
@@ -84,6 +85,26 @@ type CurrentTrack struct {
 	Type      string    `json:"current_playing_type"`
 }
 
+type RecentTrack struct {
+	Track    BaseTrack `json:"track"`
+	PlayedAt time.Time `json:"played_at"`
+	Context  Context   `json:"context"`
+}
+
+type Cursor struct {
+	Before time.Time `json:"before"`
+	After  time.Time `json:"after"`
+}
+
+type RecentTrackList struct {
+	Href   string        `json:"href"`
+	Items  []RecentTrack `json:"items"`
+	Limit  int           `json:"limit"`
+	Next   string        `json:"next"`
+	Cursor Cursor        `json:"cursor"`
+	Total  int           `json:"total"`
+}
+
 func GetTrack(trackID string) (track FullTrack, err error) {
 	r := buildReq("GET", BaseURL+"tracks/"+trackID, nil, nil)
 	r.Header.Add("Authorization", "Bearer "+token.AccessToken)
@@ -124,4 +145,19 @@ func GetAudioFeatures(trackID string) (audioFeatures Features, err error) {
 
 	err = makeReq(r, &audioFeatures)
 	return audioFeatures, err
+}
+
+func GetRecentTracks(limit int) (recentTracks RecentTrackList, err error) {
+
+	r := buildReq("GET", BaseURL+"me/player/recently-played", nil, nil)
+	r.Header.Add("Authorization", "Bearer "+token.AccessToken)
+
+	if limit != 20 {
+		q := r.URL.Query()
+		q.Add("limit", strconv.Itoa(limit))
+		r.URL.RawQuery = q.Encode()
+	}
+
+	err = makeReq(r, &recentTracks)
+	return recentTracks, err
 }
