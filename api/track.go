@@ -72,3 +72,16 @@ func GetMultipleTracks(trackIDs ...string) (tracks FullTracks, err error) {
 
 	return tracks, err
 }
+
+func getCurrentTrack(market string) (currentTrack CurrentTrack, err error) {
+
+	r := buildReq("GET", BaseURL+"me/currently-playing", nil, nil)
+	r.Header.Add("Authorization", "Bearer "+token.AccessToken)
+
+	q := r.URL.Query()
+	q.Add("market", market)
+	r.URL.RawQuery = q.Encode()
+
+	err = makeReq(r, &currentTrack)
+	return currentTrack, err
+}
