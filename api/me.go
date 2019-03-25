@@ -168,3 +168,12 @@ func GetAllTopArtists() (allTopArtists AllTopArtists, err error) {
 
 	return allTopArtists, err
 }
+
+func GetMyInfo() (myInfo UserInfo, err error) {
+
+	r := buildReq("GET", BaseURL+"me", nil, nil)
+	r.Header.Add("Authorization", "Bearer "+token.AccessToken)
+
+	err = makeReq(r, &myInfo)
+	return myInfo, err
+}
