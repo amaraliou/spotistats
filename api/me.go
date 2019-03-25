@@ -70,7 +70,7 @@ type Context struct {
 	Href         string            `json:"href"`
 }
 
-type CurrentTrack struct {
+type CurrentPlayback struct {
 	Device    Device    `json:"device"`
 	Repeat    string    `json:"repeat_state"`
 	Shuffle   bool      `json:"shuffle_state"`

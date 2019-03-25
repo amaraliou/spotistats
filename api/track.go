@@ -75,6 +75,15 @@ type Features struct {
 	AnalysisURL      string  `json:"analysis_url"`
 }
 
+type CurrentTrack struct {
+	Context   Context   `json:"context"`
+	Timestamp time.Time `json:"timestamp"`
+	Progress  int       `json:"progress_ms"`
+	Playing   bool      `json:"is_playing"`
+	Item      FullTrack `json:"item"`
+	Type      string    `json:"current_playing_type"`
+}
+
 func GetTrack(trackID string) (track FullTrack, err error) {
 	r := buildReq("GET", BaseURL+"tracks/"+trackID, nil, nil)
 	r.Header.Add("Authorization", "Bearer "+token.AccessToken)
@@ -94,7 +103,8 @@ func GetMultipleTracks(trackIDs ...string) (tracks FullTracks, err error) {
 	return tracks, err
 }
 
-func getCurrentTrack(market string) (currentTrack CurrentTrack, err error) {
+//BETA
+func GetCurrentTrack(market string) (currentTrack CurrentTrack, err error) {
 
 	r := buildReq("GET", BaseURL+"me/currently-playing", nil, nil)
 	r.Header.Add("Authorization", "Bearer "+token.AccessToken)
