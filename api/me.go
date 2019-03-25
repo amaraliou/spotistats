@@ -53,6 +53,35 @@ type UserInfo struct {
 	URI          string            `json:"uri"`
 }
 
+type Device struct {
+	ID         string `json:"id"`
+	Name       string `json:"name"`
+	Active     bool   `json:"is_active"`
+	Private    bool   `json:"is_private_session"`
+	Restricted bool   `json:"is_restricted"`
+	Type       string `json:"type"`
+	Volume     int    `json:"volume_percent"`
+}
+
+type Context struct {
+	Type         string            `json:"type"`
+	URI          string            `json:"uri"`
+	ExternalURLS map[string]string `json:"external_urls"`
+	Href         string            `json:"href"`
+}
+
+type CurrentTrack struct {
+	Device    Device    `json:"device"`
+	Repeat    string    `json:"repeat_state"`
+	Shuffle   bool      `json:"shuffle_state"`
+	Context   Context   `json:"context"`
+	Timestamp int       `json:"timestamp"`
+	Progress  int       `json:"progress_ms"`
+	Playing   bool      `json:"is_playing"`
+	Item      FullTrack `json:"item"`
+	Type      string    `json:"type"`
+}
+
 //To add offset and limit (optionals)
 func GetSavedAlbums() (savedAlbums SavedAlbumList, err error) {
 
