@@ -78,6 +78,8 @@ func GetTopTracks(timeRange string, limit, offset int) (topTracks TopTracks, err
 		q.Add("offset", strconv.Itoa(offset))
 	}
 
+	r.URL.RawQuery = q.Encode()
+
 	err = makeReq(r, &topTracks)
 	return topTracks, err
 }
