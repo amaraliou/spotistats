@@ -1,6 +1,9 @@
 package api
 
-import "net/http"
+import (
+	"net/http"
+	"strconv"
+)
 
 type TopTracks struct {
 	Href     string      `json:"href"`
@@ -60,10 +63,20 @@ func GetNextSavedTracks(url string) (savedTracks SavedTrackList, err error) {
 	return savedTracks, err
 }
 
-func GetTopTracks() (topTracks TopTracks, err error) {
+func GetTopTracks(timeRange string, limit, offset int) (topTracks TopTracks, err error) {
 
 	r := buildReq("GET", BaseURL+"me/top/tracks", nil, nil)
 	r.Header.Add("Authorization", "Bearer "+token.AccessToken)
+	q := r.URL.Query()
+	q.Add("time_range", timeRange)
+
+	if limit != 20 {
+		q.Add("limit", strconv.Itoa(limit))
+	}
+
+	if offset != 0 {
+		q.Add("offset", strconv.Itoa(offset))
+	}
 
 	err = makeReq(r, &topTracks)
 	return topTracks, err

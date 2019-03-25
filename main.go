@@ -9,7 +9,7 @@ import (
 
 func main() {
 	api.Authenticate("", "")
-	topTracks, err := api.GetTopTracks()
+	topTracks, err := api.GetTopTracks("short_term", 50, 0)
 
 	if err != nil {
 		log.Fatal(err)
