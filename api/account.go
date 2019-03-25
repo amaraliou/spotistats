@@ -4,8 +4,6 @@ import (
 	"log"
 	"net/url"
 	"time"
-
-	"github.com/spf13/viper"
 )
 
 const (
@@ -56,42 +54,4 @@ func CodeAuthorize(id, secret, code string) Token {
 	t.ClientSecret = secret
 
 	return t
-}
-
-func GetToken() string {
-	var t Token
-
-	rt := viper.GetString("refresh_token")
-	id := viper.GetString("client_id")
-	secret := viper.GetString("client_secret")
-	expiration := viper.GetTime("expiration_date")
-
-	if rt == "" {
-		log.Fatal("No valid token found")
-	}
-
-	if expiration.Before(time.Now()) {
-		v := url.Values{}
-		v.Set("grant_type", "refresh_token")
-		v.Set("refresh_token", rt)
-
-		r := buildReq("POST", BaseAccountURL+"api/token", v, nil)
-		r.Header.Add("Content-Type", "application/x-www-form-urlencoded")
-		r.SetBasicAuth(id, secret)
-
-		err := makeReq(r, &t)
-
-		if err != nil {
-			log.Fatal(err)
-		}
-
-		t.ExpirationDate = time.Now().Add((t.ExpiresIn - 30) * time.Second)
-		t.ClientID = id
-		t.ClientSecret = secret
-		t.RefreshToken = rt
-
-		return t.AccessToken
-	}
-
-	return viper.GetString("access_token")
 }
