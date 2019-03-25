@@ -206,3 +206,12 @@ func GetMyInfo() (myInfo UserInfo, err error) {
 	err = makeReq(r, &myInfo)
 	return myInfo, err
 }
+
+func GetCurrentPlayback() (playback CurrentPlayback, err error) {
+
+	r := buildReq("GET", BaseURL+"me/player", nil, nil)
+	r.Header.Add("Authorization", "Bearer "+token.AccessToken)
+
+	err = makeReq(r, &playback)
+	return playback, err
+}
