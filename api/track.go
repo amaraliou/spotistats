@@ -54,6 +54,27 @@ type FullTracks struct {
 	Tracks []FullTrack `json:"tracks"`
 }
 
+type Features struct {
+	Duration         int     `json:"duration_ms"`
+	Key              int     `json:"key"`
+	Mode             int     `json:"mode"`
+	Signature        int     `json:"time_signature"`
+	Acousticness     float32 `json:"acousticness"`
+	Danceability     float32 `json:"danceability"`
+	Energy           float32 `json:"energy"`
+	Instrumentalness float32 `json:"instrumentalness"`
+	Liveness         float32 `json:"liveness"`
+	Loudness         float32 `json:"loudness"`
+	Speechiness      float32 `json:"speechiness"`
+	Valence          float32 `json:"valence"`
+	Tempo            float32 `json:"tempo"`
+	Href             string  `json:"track_href"`
+	ID               string  `json:"id"`
+	URI              string  `json:"uri"`
+	Type             string  `json:"type"`
+	AnalysisURL      string  `json:"analysis_url"`
+}
+
 func GetTrack(trackID string) (track FullTrack, err error) {
 	r := buildReq("GET", BaseURL+"tracks/"+trackID, nil, nil)
 	r.Header.Add("Authorization", "Bearer "+token.AccessToken)
@@ -84,4 +105,13 @@ func getCurrentTrack(market string) (currentTrack CurrentTrack, err error) {
 
 	err = makeReq(r, &currentTrack)
 	return currentTrack, err
+}
+
+func GetAudioFeatures(trackID string) (audioFeatures Features, err error) {
+
+	r := buildReq("GET", BaseURL+"audio-features/"+trackID, nil, nil)
+	r.Header.Add("Authorization", "Bearer "+token.AccessToken)
+
+	err = makeReq(r, &audioFeatures)
+	return audioFeatures, err
 }
