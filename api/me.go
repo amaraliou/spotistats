@@ -15,6 +15,12 @@ type TopTracks struct {
 	Total    int         `json:"total"`
 }
 
+type AllTopTracks struct {
+	Short  TopTracks `json:"short_term"`
+	Medium TopTracks `json:"medium_term"`
+	Long   TopTracks `json:"long_term"`
+}
+
 type TopArtists struct {
 	Href     string       `json:"href"`
 	Items    []FullArtist `json:"items"`
@@ -93,10 +99,31 @@ func GetNextTopTracks(url string) (topTracks TopTracks, err error) {
 	return topTracks, err
 }
 
-func GetTopArtists() (topArtists TopArtists, err error) {
+func GetAllTopTracks() (allTopTracks AllTopTracks, err error) {
+
+	allTopTracks.Short, err = GetTopTracks("short_term", 50, 0)
+	allTopTracks.Medium, err = GetTopTracks("medium_term", 50, 0)
+	allTopTracks.Long, err = GetTopTracks("long_term", 50, 0)
+
+	return allTopTracks, err
+}
+
+func GetTopArtists(timeRange string, limit, offset int) (topArtists TopArtists, err error) {
 
 	r := buildReq("GET", BaseURL+"me/top/artists", nil, nil)
 	r.Header.Add("Authorization", "Bearer "+token.AccessToken)
+	q := r.URL.Query()
+	q.Add("time_range", timeRange)
+
+	if limit != 20 {
+		q.Add("limit", strconv.Itoa(limit))
+	}
+
+	if offset != 0 {
+		q.Add("offset", strconv.Itoa(offset))
+	}
+
+	r.URL.RawQuery = q.Encode()
 
 	err = makeReq(r, &topArtists)
 	return topArtists, err
