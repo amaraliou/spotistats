@@ -21,9 +21,8 @@ func main() {
 	//}
 	//fmt.Printf("\n")
 
-	http.HandleFunc("/", api.HandleMain)
-	http.HandleFunc("/login", api.HandleSpotifyLogin)
-	http.HandleFunc("/callback", api.HandleSpotifyCallback)
+	http.HandleFunc("/login", api.HandleLoginRequest)
+	http.HandleFunc("/callback", api.CallbackHandler)
 	fmt.Println(http.ListenAndServe(":8000", nil))
 
 }
