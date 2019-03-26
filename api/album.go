@@ -1,6 +1,7 @@
 package api
 
 import (
+	"net/url"
 	"strconv"
 	"strings"
 	"time"
@@ -82,13 +83,9 @@ func GetMultipleAlbums(albumIDs ...string) (albums FullAlbums, err error) {
 	return albums, err
 }
 
-//To add offset and limit (optionals)
 func GetAlbumTracks(albumID string, limit, offset int) (tracksPage TrackList, err error) {
 
-	r := buildReq("GET", BaseURL+"albums/"+albumID+"/tracks", nil, nil)
-	r.Header.Add("Authorization", "Bearer "+token.AccessToken)
-
-	q := r.URL.Query()
+	q := url.Values{}
 
 	if limit != 20 {
 		q.Add("limit", strconv.Itoa(limit))
@@ -98,7 +95,8 @@ func GetAlbumTracks(albumID string, limit, offset int) (tracksPage TrackList, er
 		q.Add("offset", strconv.Itoa(offset))
 	}
 
-	r.URL.RawQuery = q.Encode()
+	r := buildReq("GET", BaseURL+"albums/"+albumID+"/tracks", q, nil)
+	r.Header.Add("Authorization", "Bearer "+token.AccessToken)
 
 	err = makeReq(r, &tracksPage)
 	return tracksPage, err

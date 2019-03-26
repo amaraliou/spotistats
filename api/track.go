@@ -1,6 +1,7 @@
 package api
 
 import (
+	"net/url"
 	"strconv"
 	"strings"
 	"time"
@@ -124,15 +125,13 @@ func GetMultipleTracks(trackIDs ...string) (tracks FullTracks, err error) {
 	return tracks, err
 }
 
-//BETA
 func GetCurrentTrack(market string) (currentTrack CurrentTrack, err error) {
 
-	r := buildReq("GET", BaseURL+"me/currently-playing", nil, nil)
-	r.Header.Add("Authorization", "Bearer "+token.AccessToken)
-
-	q := r.URL.Query()
+	q := url.Values{}
 	q.Add("market", market)
-	r.URL.RawQuery = q.Encode()
+
+	r := buildReq("GET", BaseURL+"me/currently-playing", q, nil)
+	r.Header.Add("Authorization", "Bearer "+token.AccessToken)
 
 	err = makeReq(r, &currentTrack)
 	return currentTrack, err
@@ -149,14 +148,14 @@ func GetAudioFeatures(trackID string) (audioFeatures Features, err error) {
 
 func GetRecentTracks(limit int) (recentTracks RecentTrackList, err error) {
 
-	r := buildReq("GET", BaseURL+"me/player/recently-played", nil, nil)
-	r.Header.Add("Authorization", "Bearer "+token.AccessToken)
+	q := url.Values{}
 
 	if limit != 20 {
-		q := r.URL.Query()
 		q.Add("limit", strconv.Itoa(limit))
-		r.URL.RawQuery = q.Encode()
 	}
+
+	r := buildReq("GET", BaseURL+"me/player/recently-played", q, nil)
+	r.Header.Add("Authorization", "Bearer "+token.AccessToken)
 
 	err = makeReq(r, &recentTracks)
 	return recentTracks, err
