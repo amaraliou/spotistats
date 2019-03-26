@@ -3,6 +3,8 @@ package api
 import (
 	"net/http"
 	"strings"
+
+	"golang.org/x/oauth2"
 )
 
 type Followers struct {
@@ -51,7 +53,7 @@ type ArtistList struct {
 	Total    int          `json:"total"`
 }
 
-func GetArtistAlbums(artistID string) (albums AlbumList, err error) {
+func GetArtistAlbums(artistID string, token *oauth2.Token) (albums AlbumList, err error) {
 
 	r := buildReq("GET", BaseURL+"artists/"+artistID+"/albums", nil, nil)
 	r.Header.Add("Authorization", "Bearer "+token.AccessToken)
@@ -61,7 +63,7 @@ func GetArtistAlbums(artistID string) (albums AlbumList, err error) {
 	return albums, err
 }
 
-func GetNextArtistAlbums(url string) (albums AlbumList, err error) {
+func GetNextArtistAlbums(url string, token *oauth2.Token) (albums AlbumList, err error) {
 
 	r, err := http.NewRequest("GET", url, nil)
 	r.Header.Add("Authorization", "Bearer "+token.AccessToken)
@@ -71,7 +73,7 @@ func GetNextArtistAlbums(url string) (albums AlbumList, err error) {
 	return albums, err
 }
 
-func GetArtist(artistID string) (artist FullArtist, err error) {
+func GetArtist(artistID string, token *oauth2.Token) (artist FullArtist, err error) {
 
 	r := buildReq("GET", BaseURL+"artists/"+artistID, nil, nil)
 	r.Header.Add("Authorization", "Bearer "+token.AccessToken)
@@ -80,7 +82,7 @@ func GetArtist(artistID string) (artist FullArtist, err error) {
 	return artist, err
 }
 
-func GetMultipleArtists(artistIDs ...string) (artists FullArtists, err error) {
+func GetMultipleArtists(token *oauth2.Token, artistIDs ...string) (artists FullArtists, err error) {
 	IDs := strings.Join(artistIDs, ",")
 	r := buildReq("GET", BaseURL+"artists/?ids="+IDs, nil, nil)
 	r.Header.Add("Authorization", "Bearer "+token.AccessToken)
@@ -90,7 +92,7 @@ func GetMultipleArtists(artistIDs ...string) (artists FullArtists, err error) {
 	return artists, err
 }
 
-func GetArtistTopTracks(artistID string) (topTracks FullTracks, err error) {
+func GetArtistTopTracks(artistID string, token *oauth2.Token) (topTracks FullTracks, err error) {
 
 	r := buildReq("GET", BaseURL+"artists/"+artistID+"/top-tracks?country=GB", nil, nil)
 	r.Header.Add("Authorization", "Bearer "+token.AccessToken)
@@ -99,7 +101,7 @@ func GetArtistTopTracks(artistID string) (topTracks FullTracks, err error) {
 	return topTracks, err
 }
 
-func GetArtistRelatedArtists(artistID string) (relatedArtists FullArtists, err error) {
+func GetArtistRelatedArtists(artistID string, token *oauth2.Token) (relatedArtists FullArtists, err error) {
 
 	r := buildReq("GET", BaseURL+"artists/"+artistID+"/related-artists", nil, nil)
 	r.Header.Add("Authorization", "Bearer "+token.AccessToken)

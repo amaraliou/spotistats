@@ -5,6 +5,8 @@ import (
 	"strconv"
 	"strings"
 	"time"
+
+	"golang.org/x/oauth2"
 )
 
 type BaseTrack struct {
@@ -106,7 +108,7 @@ type RecentTrackList struct {
 	Total  int           `json:"total"`
 }
 
-func GetTrack(trackID string) (track FullTrack, err error) {
+func GetTrack(trackID string, token *oauth2.Token) (track FullTrack, err error) {
 	r := buildReq("GET", BaseURL+"tracks/"+trackID, nil, nil)
 	r.Header.Add("Authorization", "Bearer "+token.AccessToken)
 
@@ -115,7 +117,7 @@ func GetTrack(trackID string) (track FullTrack, err error) {
 	return track, err
 }
 
-func GetMultipleTracks(trackIDs ...string) (tracks FullTracks, err error) {
+func GetMultipleTracks(token *oauth2.Token, trackIDs ...string) (tracks FullTracks, err error) {
 	IDs := strings.Join(trackIDs, ",")
 	r := buildReq("GET", BaseURL+"tracks/?ids="+IDs, nil, nil)
 	r.Header.Add("Authorization", "Bearer "+token.AccessToken)
@@ -125,7 +127,7 @@ func GetMultipleTracks(trackIDs ...string) (tracks FullTracks, err error) {
 	return tracks, err
 }
 
-func GetCurrentTrack(market string) (currentTrack CurrentTrack, err error) {
+func GetCurrentTrack(market string, token *oauth2.Token) (currentTrack CurrentTrack, err error) {
 
 	q := url.Values{}
 	q.Add("market", market)
@@ -137,7 +139,7 @@ func GetCurrentTrack(market string) (currentTrack CurrentTrack, err error) {
 	return currentTrack, err
 }
 
-func GetAudioFeatures(trackID string) (audioFeatures Features, err error) {
+func GetAudioFeatures(trackID string, token *oauth2.Token) (audioFeatures Features, err error) {
 
 	r := buildReq("GET", BaseURL+"audio-features/"+trackID, nil, nil)
 	r.Header.Add("Authorization", "Bearer "+token.AccessToken)
@@ -146,7 +148,7 @@ func GetAudioFeatures(trackID string) (audioFeatures Features, err error) {
 	return audioFeatures, err
 }
 
-func GetRecentTracks(limit int) (recentTracks RecentTrackList, err error) {
+func GetRecentTracks(limit int, token *oauth2.Token) (recentTracks RecentTrackList, err error) {
 
 	q := url.Values{}
 

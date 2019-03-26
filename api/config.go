@@ -4,7 +4,6 @@ import (
 	"log"
 	"os"
 
-	"github.com/gorilla/securecookie"
 	"github.com/gorilla/sessions"
 	"github.com/joho/godotenv"
 	"golang.org/x/oauth2"
@@ -25,7 +24,7 @@ func init() {
 
 	OAuthConfig = configureOAuthClient(os.Getenv("CLIENT_ID"), os.Getenv("CLIENT_SECRET"))
 
-	cookieStore := sessions.NewCookieStore(securecookie.GenerateRandomKey(10))
+	cookieStore := sessions.NewCookieStore([]byte("INSERT COOKIE SECRET"))
 	cookieStore.Options = &sessions.Options{
 		HttpOnly: true,
 	}

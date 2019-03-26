@@ -5,6 +5,8 @@ import (
 	"strconv"
 	"strings"
 	"time"
+
+	"golang.org/x/oauth2"
 )
 
 type BaseAlbum struct {
@@ -65,7 +67,7 @@ type SavedAlbumList struct {
 	Total    int          `json:"total"`
 }
 
-func GetAlbum(albumID string) (album FullAlbum, err error) {
+func GetAlbum(albumID string, token *oauth2.Token) (album FullAlbum, err error) {
 
 	r := buildReq("GET", BaseURL+"albums/"+albumID, nil, nil)
 	r.Header.Add("Authorization", "Bearer "+token.AccessToken)
@@ -74,7 +76,7 @@ func GetAlbum(albumID string) (album FullAlbum, err error) {
 	return album, err
 }
 
-func GetMultipleAlbums(albumIDs ...string) (albums FullAlbums, err error) {
+func GetMultipleAlbums(token *oauth2.Token, albumIDs ...string) (albums FullAlbums, err error) {
 	IDs := strings.Join(albumIDs, ",")
 	r := buildReq("GET", BaseURL+"albums/?ids="+IDs, nil, nil)
 	r.Header.Add("Authorization", "Bearer "+token.AccessToken)
@@ -83,7 +85,7 @@ func GetMultipleAlbums(albumIDs ...string) (albums FullAlbums, err error) {
 	return albums, err
 }
 
-func GetAlbumTracks(albumID string, limit, offset int) (tracksPage TrackList, err error) {
+func GetAlbumTracks(albumID string, limit, offset int, token *oauth2.Token) (tracksPage TrackList, err error) {
 
 	q := url.Values{}
 
