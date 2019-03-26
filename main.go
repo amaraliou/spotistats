@@ -16,8 +16,8 @@ func main() {
 	}
 
 	fmt.Printf("\nTOP TRACKS:\n")
-	for _, track := range topTracks.Items {
-		fmt.Printf("\n%s", track.Name)
+	for number, track := range topTracks.Items {
+		fmt.Printf("\n%d - %s", number+1, track.Name)
 	}
 	fmt.Printf("\n")
 }
