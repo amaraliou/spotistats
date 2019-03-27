@@ -15,7 +15,6 @@ func HandleHomepage(writer http.ResponseWriter, request *http.Request) {
 	}
 
 	tok := currentSession.Values["oauth_token"].(string)
-	fmt.Print(tok)
 	topTracks, err := api.GetTopTracks("long_term", 10, 0, tok)
 	if err != nil {
 		log.Fatal(err)
@@ -26,14 +25,24 @@ func HandleHomepage(writer http.ResponseWriter, request *http.Request) {
 		log.Fatal(err)
 	}
 
+	currentlyPlaying, err := api.GetCurrentTrack("GB", tok)
+	if err != nil {
+		log.Fatal(err)
+	}
+
+	fmt.Fprintf(writer, "<h1>CURRENTLY PLAYING</h1>")
+	fmt.Fprintf(writer, "<h3>%s</h3>", currentlyPlaying.Item.Name)
+
+	fmt.Fprintf(writer, "<h1>TOP TRACKS</h1>")
 	for number, track := range topTracks.Items {
-		fmt.Fprintf(writer, "<h1>%d %s</h1>",
+		fmt.Fprintf(writer, "<h3>%d %s</h3>",
 			number+1,
 			track.Name)
 	}
 
+	fmt.Fprintf(writer, "<h1>TOP ARTISTS</h1>")
 	for number, artist := range topArtists.Items {
-		fmt.Fprintf(writer, "<h1>%d %s</h1>",
+		fmt.Fprintf(writer, "<h3>%d %s</h3>",
 			number+1,
 			artist.Name)
 	}

@@ -62,6 +62,8 @@ func configureOAuthClient(clientID, clientSecret string) *oauth2.Config {
 		RedirectURL:  redirectURL,
 		Scopes: []string{
 			ScopeUserTopRead,
+			ScopeUserReadCurrentlyPlaying,
+			ScopeUserReadPlaybackState,
 		},
 		Endpoint: spotify.Endpoint,
 	}

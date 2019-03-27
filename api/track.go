@@ -79,9 +79,10 @@ type Features struct {
 	AnalysisURL      string  `json:"analysis_url"`
 }
 
+//To change timestamp type
 type CurrentTrack struct {
 	Context   Context   `json:"context"`
-	Timestamp time.Time `json:"timestamp"`
+	Timestamp int       `json:"timestamp"`
 	Progress  int       `json:"progress_ms"`
 	Playing   bool      `json:"is_playing"`
 	Item      FullTrack `json:"item"`
@@ -108,32 +109,32 @@ type RecentTrackList struct {
 	Total  int           `json:"total"`
 }
 
-func GetTrack(trackID string, token *oauth2.Token) (track FullTrack, err error) {
+func GetTrack(trackID string, token string) (track FullTrack, err error) {
 	r := buildReq("GET", BaseURL+"tracks/"+trackID, nil, nil)
-	r.Header.Add("Authorization", "Bearer "+token.AccessToken)
+	r.Header.Add("Authorization", "Bearer "+token)
 
 	err = makeReq(r, &track)
 
 	return track, err
 }
 
-func GetMultipleTracks(token *oauth2.Token, trackIDs ...string) (tracks FullTracks, err error) {
+func GetMultipleTracks(token string, trackIDs ...string) (tracks FullTracks, err error) {
 	IDs := strings.Join(trackIDs, ",")
 	r := buildReq("GET", BaseURL+"tracks/?ids="+IDs, nil, nil)
-	r.Header.Add("Authorization", "Bearer "+token.AccessToken)
+	r.Header.Add("Authorization", "Bearer "+token)
 
 	err = makeReq(r, &tracks)
 
 	return tracks, err
 }
 
-func GetCurrentTrack(market string, token *oauth2.Token) (currentTrack CurrentTrack, err error) {
+func GetCurrentTrack(market string, token string) (currentTrack CurrentTrack, err error) {
 
 	q := url.Values{}
 	q.Add("market", market)
 
-	r := buildReq("GET", BaseURL+"me/currently-playing", q, nil)
-	r.Header.Add("Authorization", "Bearer "+token.AccessToken)
+	r := buildReq("GET", BaseURL+"me/player/currently-playing", q, nil)
+	r.Header.Add("Authorization", "Bearer "+token)
 
 	err = makeReq(r, &currentTrack)
 	return currentTrack, err
@@ -148,7 +149,7 @@ func GetAudioFeatures(trackID string, token *oauth2.Token) (audioFeatures Featur
 	return audioFeatures, err
 }
 
-func GetRecentTracks(limit int, token *oauth2.Token) (recentTracks RecentTrackList, err error) {
+func GetRecentTracks(limit int, token string) (recentTracks RecentTrackList, err error) {
 
 	q := url.Values{}
 
@@ -157,7 +158,7 @@ func GetRecentTracks(limit int, token *oauth2.Token) (recentTracks RecentTrackLi
 	}
 
 	r := buildReq("GET", BaseURL+"me/player/recently-played", q, nil)
-	r.Header.Add("Authorization", "Bearer "+token.AccessToken)
+	r.Header.Add("Authorization", "Bearer "+token)
 
 	err = makeReq(r, &recentTracks)
 	return recentTracks, err
