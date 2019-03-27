@@ -4,8 +4,6 @@ import (
 	"net/http"
 	"net/url"
 	"strconv"
-
-	"golang.org/x/oauth2"
 )
 
 type TopTracks struct {
@@ -85,7 +83,7 @@ type CurrentPlayback struct {
 	Type      string    `json:"type"`
 }
 
-func GetSavedAlbums(limit, offset int, token *oauth2.Token) (savedAlbums SavedAlbumList, err error) {
+func GetSavedAlbums(limit, offset int, token string) (savedAlbums SavedAlbumList, err error) {
 
 	q := url.Values{}
 
@@ -98,22 +96,22 @@ func GetSavedAlbums(limit, offset int, token *oauth2.Token) (savedAlbums SavedAl
 	}
 
 	r := buildReq("GET", BaseURL+"me/albums", q, nil)
-	r.Header.Add("Authorization", "Bearer "+token.AccessToken)
+	r.Header.Add("Authorization", "Bearer "+token)
 
 	err = makeReq(r, &savedAlbums)
 	return savedAlbums, err
 }
 
-func GetNextSavedAlbums(url string, token *oauth2.Token) (savedAlbums SavedAlbumList, err error) {
+func GetNextSavedAlbums(url string, token string) (savedAlbums SavedAlbumList, err error) {
 
 	r, err := http.NewRequest("GET", url, nil)
-	r.Header.Add("Authorization", "Bearer "+token.AccessToken)
+	r.Header.Add("Authorization", "Bearer "+token)
 
 	err = makeReq(r, &savedAlbums)
 	return savedAlbums, err
 }
 
-func GetSavedTracks(limit, offset int, token *oauth2.Token) (savedTracks SavedTrackList, err error) {
+func GetSavedTracks(limit, offset int, token string) (savedTracks SavedTrackList, err error) {
 
 	q := url.Values{}
 
@@ -126,16 +124,16 @@ func GetSavedTracks(limit, offset int, token *oauth2.Token) (savedTracks SavedTr
 	}
 
 	r := buildReq("GET", BaseURL+"me/tracks", q, nil)
-	r.Header.Add("Authorization", "Bearer "+token.AccessToken)
+	r.Header.Add("Authorization", "Bearer "+token)
 
 	err = makeReq(r, &savedTracks)
 	return savedTracks, err
 }
 
-func GetNextSavedTracks(url string, token *oauth2.Token) (savedTracks SavedTrackList, err error) {
+func GetNextSavedTracks(url string, token string) (savedTracks SavedTrackList, err error) {
 
 	r, err := http.NewRequest("GET", url, nil)
-	r.Header.Add("Authorization", "Bearer "+token.AccessToken)
+	r.Header.Add("Authorization", "Bearer "+token)
 
 	err = makeReq(r, &savedTracks)
 	return savedTracks, err
@@ -161,10 +159,10 @@ func GetTopTracks(timeRange string, limit, offset int, token string) (topTracks 
 	return topTracks, err
 }
 
-func GetNextTopTracks(url string, token *oauth2.Token) (topTracks TopTracks, err error) {
+func GetNextTopTracks(url string, token string) (topTracks TopTracks, err error) {
 
 	r, err := http.NewRequest("GET", url, nil)
-	r.Header.Add("Authorization", "Bearer "+token.AccessToken)
+	r.Header.Add("Authorization", "Bearer "+token)
 
 	err = makeReq(r, &topTracks)
 	return topTracks, err
@@ -179,7 +177,7 @@ func GetAllTopTracks(token string) (allTopTracks AllTopTracks, err error) {
 	return allTopTracks, err
 }
 
-func GetTopArtists(timeRange string, limit, offset int, token *oauth2.Token) (topArtists TopArtists, err error) {
+func GetTopArtists(timeRange string, limit, offset int, token string) (topArtists TopArtists, err error) {
 
 	q := url.Values{}
 	q.Add("time_range", timeRange)
@@ -193,21 +191,21 @@ func GetTopArtists(timeRange string, limit, offset int, token *oauth2.Token) (to
 	}
 
 	r := buildReq("GET", BaseURL+"me/top/artists", q, nil)
-	r.Header.Add("Authorization", "Bearer "+token.AccessToken)
+	r.Header.Add("Authorization", "Bearer "+token)
 	err = makeReq(r, &topArtists)
 	return topArtists, err
 }
 
-func GetNextTopArtists(url string, token *oauth2.Token) (topArtists TopArtists, err error) {
+func GetNextTopArtists(url string, token string) (topArtists TopArtists, err error) {
 
 	r, err := http.NewRequest("GET", url, nil)
-	r.Header.Add("Authorization", "Bearer "+token.AccessToken)
+	r.Header.Add("Authorization", "Bearer "+token)
 
 	err = makeReq(r, &topArtists)
 	return topArtists, err
 }
 
-func GetAllTopArtists(token *oauth2.Token) (allTopArtists AllTopArtists, err error) {
+func GetAllTopArtists(token string) (allTopArtists AllTopArtists, err error) {
 
 	allTopArtists.Short, err = GetTopArtists("short_term", 50, 0, token)
 	allTopArtists.Medium, err = GetTopArtists("medium_term", 50, 0, token)
@@ -216,19 +214,19 @@ func GetAllTopArtists(token *oauth2.Token) (allTopArtists AllTopArtists, err err
 	return allTopArtists, err
 }
 
-func GetMyInfo(token *oauth2.Token) (myInfo UserInfo, err error) {
+func GetMyInfo(token string) (myInfo UserInfo, err error) {
 
 	r := buildReq("GET", BaseURL+"me", nil, nil)
-	r.Header.Add("Authorization", "Bearer "+token.AccessToken)
+	r.Header.Add("Authorization", "Bearer "+token)
 
 	err = makeReq(r, &myInfo)
 	return myInfo, err
 }
 
-func GetCurrentPlayback(token *oauth2.Token) (playback CurrentPlayback, err error) {
+func GetCurrentPlayback(token string) (playback CurrentPlayback, err error) {
 
 	r := buildReq("GET", BaseURL+"me/player", nil, nil)
-	r.Header.Add("Authorization", "Bearer "+token.AccessToken)
+	r.Header.Add("Authorization", "Bearer "+token)
 
 	err = makeReq(r, &playback)
 	return playback, err

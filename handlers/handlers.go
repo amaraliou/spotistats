@@ -16,7 +16,12 @@ func HandleHomepage(writer http.ResponseWriter, request *http.Request) {
 
 	tok := currentSession.Values["oauth_token"].(string)
 	fmt.Print(tok)
-	topTracks, err := api.GetTopTracks("short_term", 50, 0, tok)
+	topTracks, err := api.GetTopTracks("long_term", 10, 0, tok)
+	if err != nil {
+		log.Fatal(err)
+	}
+
+	topArtists, err := api.GetTopArtists("long_term", 10, 0, tok)
 	if err != nil {
 		log.Fatal(err)
 	}
@@ -25,5 +30,11 @@ func HandleHomepage(writer http.ResponseWriter, request *http.Request) {
 		fmt.Fprintf(writer, "<h1>%d %s</h1>",
 			number+1,
 			track.Name)
+	}
+
+	for number, artist := range topArtists.Items {
+		fmt.Fprintf(writer, "<h1>%d %s</h1>",
+			number+1,
+			artist.Name)
 	}
 }
