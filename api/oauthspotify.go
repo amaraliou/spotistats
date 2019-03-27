@@ -6,7 +6,6 @@ import (
 	"log"
 	"net/http"
 
-	"github.com/gofrs/uuid"
 	"golang.org/x/oauth2"
 )
 
@@ -21,9 +20,8 @@ func init() {
 }
 
 func HandleLoginRequest(writer http.ResponseWriter, request *http.Request) {
-	sessionID := uuid.Must(uuid.NewV4()).String()
 
-	oauthFlowSession, err := SessionStore.New(request, sessionID)
+	oauthFlowSession, err := SessionStore.New(request, "spotistats")
 	if err != nil {
 		log.Fatal(err)
 	}
@@ -36,7 +34,7 @@ func HandleLoginRequest(writer http.ResponseWriter, request *http.Request) {
 		log.Fatal(err)
 	}
 
-	authCodeURL := OAuthConfig.AuthCodeURL(sessionID, oauth2.ApprovalForce, oauth2.AccessTypeOnline)
+	authCodeURL := OAuthConfig.AuthCodeURL("spotistats", oauth2.ApprovalForce, oauth2.AccessTypeOnline)
 	http.Redirect(writer, request, authCodeURL, http.StatusFound)
 }
 
@@ -74,12 +72,12 @@ func CallbackHandler(writer http.ResponseWriter, request *http.Request) {
 		log.Fatal(err)
 	}
 
-	session, err := SessionStore.New(request, defaultSessionID)
+	session, err := SessionStore.New(request, "spotistats")
 	if err != nil {
 		log.Fatal(err)
 	}
 
-	session.Values[oauthTokenSessionKey] = tok
+	session.Values[oauthTokenSessionKey] = tok.AccessToken
 	if err := session.Save(request, writer); err != nil {
 		log.Fatal(err)
 	}

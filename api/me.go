@@ -141,7 +141,7 @@ func GetNextSavedTracks(url string, token *oauth2.Token) (savedTracks SavedTrack
 	return savedTracks, err
 }
 
-func GetTopTracks(timeRange string, limit, offset int, token *oauth2.Token) (topTracks TopTracks, err error) {
+func GetTopTracks(timeRange string, limit, offset int, token string) (topTracks TopTracks, err error) {
 
 	q := url.Values{}
 	q.Add("time_range", timeRange)
@@ -155,7 +155,7 @@ func GetTopTracks(timeRange string, limit, offset int, token *oauth2.Token) (top
 	}
 
 	r := buildReq("GET", BaseURL+"me/top/tracks", q, nil)
-	r.Header.Add("Authorization", "Bearer "+token.AccessToken)
+	r.Header.Add("Authorization", "Bearer "+token)
 
 	err = makeReq(r, &topTracks)
 	return topTracks, err
@@ -170,7 +170,7 @@ func GetNextTopTracks(url string, token *oauth2.Token) (topTracks TopTracks, err
 	return topTracks, err
 }
 
-func GetAllTopTracks(token *oauth2.Token) (allTopTracks AllTopTracks, err error) {
+func GetAllTopTracks(token string) (allTopTracks AllTopTracks, err error) {
 
 	allTopTracks.Short, err = GetTopTracks("short_term", 50, 0, token)
 	allTopTracks.Medium, err = GetTopTracks("medium_term", 50, 0, token)

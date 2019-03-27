@@ -5,6 +5,7 @@ import (
 	"net/http"
 
 	"github.com/amaraliou/spotistats/api"
+	"github.com/amaraliou/spotistats/handlers"
 )
 
 func main() {
@@ -20,7 +21,7 @@ func main() {
 	//fmt.Printf("\n%d - %s", number+1, track.Name)
 	//}
 	//fmt.Printf("\n")
-
+	http.HandleFunc("/home", handlers.HandleHomepage)
 	http.HandleFunc("/login", api.HandleLoginRequest)
 	http.HandleFunc("/callback", api.CallbackHandler)
 	fmt.Println(http.ListenAndServe(":8000", nil))

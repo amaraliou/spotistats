@@ -16,6 +16,26 @@ var (
 	SessionStore sessions.Store
 )
 
+const (
+	ScopeImageUpload               = "ugc-image-upload"
+	ScopePlaylistReadPrivate       = "playlist-read-private"
+	ScopePlaylistModifyPublic      = "playlist-modify-public"
+	ScopePlaylistModifyPrivate     = "playlist-modify-private"
+	ScopePlaylistReadCollaborative = "playlist-read-collaborative"
+	ScopeUserFollowModify          = "user-follow-modify"
+	ScopeUserFollowRead            = "user-follow-read"
+	ScopeUserLibraryModify         = "user-library-modify"
+	ScopeUserLibraryRead           = "user-library-read"
+	ScopeUserReadPrivate           = "user-read-private"
+	ScopeUserReadEmail             = "user-read-email"
+	ScopeUserReadBirthdate         = "user-read-birthdate"
+	ScopeUserReadCurrentlyPlaying  = "user-read-currently-playing"
+	ScopeUserReadPlaybackState     = "user-read-playback-state"
+	ScopeUserModifyPlaybackState   = "user-modify-playback-state"
+	ScopeUserReadRecentlyPlayed    = "user-read-recently-played"
+	ScopeUserTopRead               = "user-top-read"
+)
+
 func init() {
 	err := godotenv.Load()
 	if err != nil {
@@ -24,7 +44,7 @@ func init() {
 
 	OAuthConfig = configureOAuthClient(os.Getenv("CLIENT_ID"), os.Getenv("CLIENT_SECRET"))
 
-	cookieStore := sessions.NewCookieStore([]byte("INSERT COOKIE SECRET"))
+	cookieStore := sessions.NewCookieStore([]byte(""))
 	cookieStore.Options = &sessions.Options{
 		HttpOnly: true,
 	}
