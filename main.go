@@ -21,9 +21,14 @@ func main() {
 	//fmt.Printf("\n%d - %s", number+1, track.Name)
 	//}
 	//fmt.Printf("\n")
+	http.HandleFunc("/", rootHandler)
 	http.HandleFunc("/home", handlers.HandleHomepage)
 	http.HandleFunc("/login", api.HandleLoginRequest)
 	http.HandleFunc("/callback", api.CallbackHandler)
 	fmt.Println(http.ListenAndServe(":8000", nil))
 
+}
+
+func rootHandler(w http.ResponseWriter, r *http.Request) {
+	http.ServeFile(w, r, "templates/index.html")
 }
