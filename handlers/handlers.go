@@ -47,3 +47,15 @@ func HandleHomepage(writer http.ResponseWriter, request *http.Request) {
 			artist.Name)
 	}
 }
+
+func HandleTopTracksPage(writer http.ResponseWriter, request *http.Request) {
+
+}
+
+func HandleTopArtistsPage(writer http.ResponseWriter, request *http.Request) {
+
+}
+
+func HandleRecentlyPlayedPage(writer http.ResponseWriter, request *http.Request) {
+
+}
