@@ -4,6 +4,6 @@
 
 - Modify how the token data is saved in the CookieStore
 - Find a way to refresh the token when expired
-- Make all the api functions return JSON Data for a possible VueJS frontend
-- Integrate Echo
-- Create corresponding Vue components
+- Make Login page responsive
+- Work on homepage
+- Create a responsive navbar template

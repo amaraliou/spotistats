@@ -23,6 +23,7 @@ func main() {
 	//fmt.Printf("\n%d - %s", number+1, track.Name)
 	//}
 	//fmt.Printf("\n")
+	http.Handle("/static/", http.StripPrefix("/static/", http.FileServer(http.Dir("static"))))
 	http.HandleFunc("/", rootHandler)
 	http.HandleFunc("/home", handlers.HandleHomepage)
 	http.HandleFunc("/login", api.HandleLoginRequest)

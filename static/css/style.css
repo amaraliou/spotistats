@@ -1,0 +1,70 @@
+html, body {
+    background-color: #191414;
+    font-family: 'Montserrat', sans-serif;
+    color: white;
+    height: 100%;
+    width: 100%;
+    margin: 0;
+    padding: 0;
+}
+
+.href-button {
+    color: white;
+}
+
+.href-button:hover {
+    color: white;
+}
+
+.login-button {
+    background-color: #1DB954;
+    margin: 10px;
+}
+
+.login-button:hover {
+    background-color: rgb(15, 105, 47);
+}
+
+div.container {
+    height: 100%;
+}
+
+button {
+    border: 0;
+    width: 220px;
+    height: 50px;
+    border-radius: 25px;
+    font-size: 18px;
+    font-weight: bold;
+    outline: none;
+    margin: 0;
+}
+
+div.home {
+    padding: 50px;
+    position: relative;
+    height: 100%;
+    text-align: center;
+}
+
+div.home-text {
+    width: 600px;
+    height: 300px;
+    margin: auto;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%)
+}
+
+h1.home-title {
+    color: #1DB954;
+    font-size: 46px;
+    font-weight: bold;
+    vertical-align: center;
+}
+
+p.home-intro {
+    font-size: 24px;
+    vertical-align: center;
+}

@@ -1,9 +1,19 @@
 <!DOCTYPE html>
 <html lang="en">
-{{define "title"}}Login Page{{end}}
+{{define "title"}}Home Page{{end}}
 <body>
     {{define "index"}}
-    <button>Log In with Spotify</button>
+    <div class="container">
+        <div class="home">
+            <div class="home-text">
+                <h1 class="home-title">Welcome to Spotistats</h1>
+                <p class="home-intro">Spotistats is a tool to see your top tracks, artists, recent tracks, playlists and other data from your Spotify account</p>
+                <a class="href-button" href="/login">
+                    <button class="login-button">Login with Spotify</button>
+                </a>
+            </div>
+        </div>
+    </div>
     {{end}}
 </body>
 </html>
