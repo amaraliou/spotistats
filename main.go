@@ -2,6 +2,8 @@ package main
 
 import (
 	"fmt"
+	"html/template"
+	"log"
 	"net/http"
 
 	"github.com/amaraliou/spotistats/api"
@@ -30,5 +32,9 @@ func main() {
 }
 
 func rootHandler(w http.ResponseWriter, r *http.Request) {
-	http.ServeFile(w, r, "templates/index.html")
+	t, err := template.ParseFiles("templates/base.html", "templates/index.html")
+	if err != nil {
+		log.Fatalf("Could not parse template: %v", err)
+	}
+	t.ExecuteTemplate(w, "base", nil)
 }
