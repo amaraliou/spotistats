@@ -76,10 +76,33 @@ func HandleHome(writer http.ResponseWriter, request *http.Request) {
 	t.ExecuteTemplate(writer, "homepage", data)
 }
 
-func HandleTopTracks(w http.ResponseWriter, r *http.Request) {
-	t, err := template.ParseFiles("templates/toptracks.html", "templates/navbar.html")
+func HandleTopTracks(writer http.ResponseWriter, request *http.Request) {
+	t, err := template.New("templates/toptracks.html").Funcs(
+		template.FuncMap{
+			"add": func(a int) int {
+				return a + 1
+			},
+		},
+	).ParseFiles("templates/toptracks.html", "templates/navbar.html")
 	if err != nil {
 		log.Fatalf("Could not parse template: %v", err)
 	}
-	t.ExecuteTemplate(w, "toptracks", nil)
+
+	currentSession, err := api.SessionStore.Get(request, "spotistats")
+	if err != nil {
+		log.Fatal(err)
+	}
+
+	tok := currentSession.Values["oauth_token"].(string)
+	allTopTracks, err := api.GetAllTopTracks(tok)
+	if err != nil {
+		log.Fatal(err)
+	}
+
+	data := map[string]interface{}{
+		"longTerm":   allTopTracks.Long,
+		"mediumTerm": allTopTracks.Medium,
+		"shortTerm":  allTopTracks.Short,
+	}
+	t.ExecuteTemplate(writer, "toptracks", data)
 }

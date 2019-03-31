@@ -17,6 +17,33 @@
         <div class="home-row">
             {{template "navbar" .}}
         </div>
+        <div class="top-tracks-container">
+            <div>
+                <div class="top-navbar-container">
+                    <div class="top-navbar">
+                        <a href="#">All Time</a>
+                        <a href="#">Past 6 Months</a>
+                        <a href="#" class="active">Past Month</a>
+                    </div>
+                    <h3 class="top-navbar-title">Top Tracks</h3>
+                </div>
+            </div>
+            <div class="top-tracks">
+                {{range $i, $e := .shortTerm.Items}}
+                    <div class="top-track-large">
+                        <img src="{{ (index .Album.Images 1).URL }}" alt="Bruh">
+                        <div class="top-track-info">
+                            <h3 class="top-track-name-large">{{add $i}}. {{$e.Name}}</h3>
+                            <div class="top-track-artists">
+                                {{range .Artists}}
+                                    <h3>{{.Name}}</h3>
+                                {{end}}
+                            </div>
+                        </div>
+                    </div>
+                {{end}}
+            </div>
+        </div>
     </div>
 </body>
 </html>

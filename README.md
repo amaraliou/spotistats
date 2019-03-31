@@ -12,3 +12,6 @@
 
 - Homepage
 ![Homepage](screenshots/homepage.jpg "Homepage")
+
+- Top Tracks page
+![Top Tracks](screenshots/toptracks.jpg "Top Tracks")

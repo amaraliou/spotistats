@@ -82,6 +82,57 @@ p.home-intro {
   margin-top: 20px;
 }
 
+.top-tracks-container {
+    display: flex;
+    flex-direction: column;
+    width: 1400px;
+    justify-content: center;
+}
+
+.top-navbar-container {
+    display: flex;
+    flex-direction: row;
+    width: 1400px;
+    align-items: center;
+}
+
+.top-navbar {
+  overflow: hidden;
+  top: 0;
+  width: 100%;
+  text-align: left;
+  min-height: 25px;
+  margin-top: 20px;
+  margin-left: 10px;
+}
+
+.top-navbar-title {
+    justify-self: right;
+    width: 200px;
+    text-align: right;
+    font-size: 16px;
+    font-weight: bold;
+}
+
+.top-navbar a {
+  display: inline;
+  color: white;
+  text-decoration: none;
+  padding-left: 10px;
+  padding-right: 10px;
+  font-size: 14px;
+  font-weight: bold;
+  vertical-align: center;
+  outline: none;
+}
+
+.top-navbar h3 {
+    display: inline;
+    text-align: left;
+    padding-right: 44vw;
+    font-weight: bold;
+}
+
 .navbar a {
   display: inline;
   color: white;
@@ -95,7 +146,7 @@ p.home-intro {
   outline: none;
 }
 
-.navbar a.active {
+a.active {
     color: #1DB954;
 }
 
@@ -190,10 +241,30 @@ img.user-profile-pic {
     width: 450px;
 }
 
+.top-track-large {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    width: 700px;
+}
+
+.top-track-large img {
+    max-width: 140px;
+    max-height: 140px;
+    margin: 10px;
+}
+
 .top-track-name {
     font-size: 15px;
     margin: 10px 0px;
     margin-left: 25px;
+}
+
+.top-track-name-large {
+    font-size: 15px;
+    margin: 10px 0px;
+    margin-left: 25px;
+    font-weight: 600;
 }
 
 .top-track img {
@@ -227,4 +298,17 @@ div.top-track-artists h3:last-of-type::after{
 
 div.top-track-artists {
     margin-left: 25px;
+}
+
+.top-tracks {
+    width: 1400px;
+    margin: 15px;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: center;
+    border-top: 2px solid;
+    border-color: #1DB954;
+    padding-top: 20px;
 }
