@@ -92,6 +92,7 @@ p.home-intro {
   font-size: 17px;
   font-weight: bold;
   vertical-align: center;
+  outline: none;
 }
 
 .navbar a.active {
@@ -115,20 +116,28 @@ div.home-container {
 
 div.user {
     display: flex;
+    flex-direction: column;
     align-items: center;
+    justify-content: center;
 }
 
 .profile-row {
-    margin-left: 15px;
-    margin-right: 15px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
 }
 
 .profile-row h1 {
+    margin-bottom: 5px;
+    margin-top: 5px;
     font-size: 25px;
     font-weight: bold;
 }
 
 .profile-row h2 {
+    margin-top: 5px;
+    margin-bottom: 5px;
     font-size: 20px;
 }
 
@@ -138,7 +147,7 @@ img.user-profile-pic {
     height: 200px;
     border-radius: 100px;
     float: left;
-    margin: 20px;
+    margin: 5px;
 }
 
 .home-top-container {
