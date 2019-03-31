@@ -160,7 +160,6 @@ img.user-profile-pic {
     margin: 15px;
     display: flex;
     flex-direction: column;
-    text-align: center;
     align-items: center;
 }
 
@@ -191,7 +190,7 @@ img.user-profile-pic {
     width: 450px;
 }
 
-.top-track h3 {
+.top-track-name {
     font-size: 15px;
     margin: 10px 0px;
     margin-left: 25px;
@@ -210,4 +209,22 @@ img.user-profile-pic {
 .top-title h2 {
     font-size: 22px;
     font-weight: bold;
+}
+
+div.top-track-artists h3 {
+    display: inline;
+    font-size: 15px;
+    color: grey;
+}
+
+div.top-track-artists h3::after {
+    content: ","
+}
+
+div.top-track-artists h3:last-of-type::after{
+     display: none;
+}
+
+div.top-track-artists {
+    margin-left: 25px;
 }

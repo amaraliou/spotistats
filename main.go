@@ -24,6 +24,7 @@ func main() {
 	//fmt.Printf("\n")
 	http.Handle("/static/", http.StripPrefix("/static/", http.FileServer(http.Dir("static"))))
 	http.HandleFunc("/", rootHandler)
+	http.HandleFunc("/top/tracks", HandleTopTracks)
 	http.HandleFunc("/home", HandleHome)
 	http.HandleFunc("/login", api.HandleLoginRequest)
 	http.HandleFunc("/callback", api.CallbackHandler)
@@ -40,7 +41,7 @@ func rootHandler(w http.ResponseWriter, r *http.Request) {
 }
 
 func HandleHome(writer http.ResponseWriter, request *http.Request) {
-	t, err := template.ParseFiles("templates/base-logged-in.html", "templates/navbar.html")
+	t, err := template.ParseFiles("templates/homepage.html", "templates/navbar.html")
 	if err != nil {
 		log.Fatalf("Could not parse template: %v", err)
 	}
@@ -53,10 +54,32 @@ func HandleHome(writer http.ResponseWriter, request *http.Request) {
 	tok := currentSession.Values["oauth_token"].(string)
 
 	topArtists, err := api.GetTopArtists("long_term", 10, 0, tok)
+	if err != nil {
+		log.Fatal(err)
+	}
+
 	topTracks, err := api.GetTopTracks("long_term", 10, 0, tok)
+	if err != nil {
+		log.Fatal(err)
+	}
+
+	userInfo, err := api.GetMyInfo(tok)
+	if err != nil {
+		log.Fatal(err)
+	}
+
 	data := map[string]interface{}{
 		"TopArtists": topArtists,
 		"TopTracks":  topTracks,
+		"User":       userInfo,
 	}
-	t.ExecuteTemplate(writer, "base-logged-in", data)
+	t.ExecuteTemplate(writer, "homepage", data)
+}
+
+func HandleTopTracks(w http.ResponseWriter, r *http.Request) {
+	t, err := template.ParseFiles("templates/toptracks.html", "templates/navbar.html")
+	if err != nil {
+		log.Fatalf("Could not parse template: %v", err)
+	}
+	t.ExecuteTemplate(w, "toptracks", nil)
 }
