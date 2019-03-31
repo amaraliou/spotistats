@@ -44,5 +44,19 @@ func HandleHome(writer http.ResponseWriter, request *http.Request) {
 	if err != nil {
 		log.Fatalf("Could not parse template: %v", err)
 	}
-	t.ExecuteTemplate(writer, "base-logged-in", nil)
+
+	currentSession, err := api.SessionStore.Get(request, "spotistats")
+	if err != nil {
+		log.Fatal(err)
+	}
+
+	tok := currentSession.Values["oauth_token"].(string)
+
+	topArtists, err := api.GetTopArtists("long_term", 10, 0, tok)
+	topTracks, err := api.GetTopTracks("long_term", 10, 0, tok)
+	data := map[string]interface{}{
+		"TopArtists": topArtists,
+		"TopTracks":  topTracks,
+	}
+	t.ExecuteTemplate(writer, "base-logged-in", data)
 }

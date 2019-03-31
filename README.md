@@ -7,3 +7,8 @@
 - Make Login page responsive
 - Work on homepage
 - Create a responsive navbar template
+
+## Screenshots
+
+- Homepage
+![Homepage](screenshots/homepage.jpg "Homepage")

@@ -25,8 +25,8 @@ type BaseTrack struct {
 
 type FullTrack struct {
 	BaseTrack
-	Album      *BaseAlbum `json:"album"`
-	Popularity int        `json:"popularity"`
+	Album      BaseAlbum `json:"album"`
+	Popularity int       `json:"popularity"`
 }
 
 type SavedTrack struct {

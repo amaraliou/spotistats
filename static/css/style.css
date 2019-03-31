@@ -159,7 +159,7 @@ img.user-profile-pic {
     display: flex;
     flex-direction: row;
     align-items: center;
-    width: 350px;
+    width: 450px;
 }
 
 .top-artist h3 {
@@ -172,6 +172,25 @@ img.user-profile-pic {
     width: 70px;
     height: 70px;
     border-radius: 35px;
+    margin: 10px;
+}
+
+.top-track {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    width: 450px;
+}
+
+.top-track h3 {
+    font-size: 15px;
+    margin: 10px 0px;
+    margin-left: 25px;
+}
+
+.top-track img {
+    max-width: 70px;
+    max-height: 70px;
     margin: 10px;
 }
 
