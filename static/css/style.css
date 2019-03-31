@@ -2,10 +2,13 @@ html, body {
     background-color: #191414;
     font-family: 'Montserrat', sans-serif;
     color: white;
-    height: 100%;
     width: 100%;
     margin: 0;
     padding: 0;
+}
+
+.log-in {
+    height: 100%;
 }
 
 .href-button {
@@ -67,4 +70,30 @@ h1.home-title {
 p.home-intro {
     font-size: 24px;
     vertical-align: center;
+}
+
+.navbar {
+  overflow: hidden;
+  position: fixed;
+  top: 0;
+  width: 100%;
+  text-align: center;
+  min-height: 25px;
+  margin-top: 20px;
+}
+
+.navbar a {
+  display: inline;
+  color: white;
+  text-align: center;
+  text-decoration: none;
+  padding-left: 10px;
+  padding-right: 10px;
+  font-size: 17px;
+  font-weight: bold;
+  vertical-align: center;
+}
+
+.navbar a.active {
+    color: #1DB954;
 }

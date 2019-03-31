@@ -7,7 +7,6 @@ import (
 	"net/http"
 
 	"github.com/amaraliou/spotistats/api"
-	"github.com/amaraliou/spotistats/handlers"
 )
 
 func main() {
@@ -25,7 +24,7 @@ func main() {
 	//fmt.Printf("\n")
 	http.Handle("/static/", http.StripPrefix("/static/", http.FileServer(http.Dir("static"))))
 	http.HandleFunc("/", rootHandler)
-	http.HandleFunc("/home", handlers.HandleHomepage)
+	http.HandleFunc("/home", HandleHome)
 	http.HandleFunc("/login", api.HandleLoginRequest)
 	http.HandleFunc("/callback", api.CallbackHandler)
 	fmt.Println(http.ListenAndServe(":8000", nil))
@@ -38,4 +37,12 @@ func rootHandler(w http.ResponseWriter, r *http.Request) {
 		log.Fatalf("Could not parse template: %v", err)
 	}
 	t.ExecuteTemplate(w, "base", nil)
+}
+
+func HandleHome(writer http.ResponseWriter, request *http.Request) {
+	t, err := template.ParseFiles("templates/base-logged-in.html", "templates/navbar.html")
+	if err != nil {
+		log.Fatalf("Could not parse template: %v", err)
+	}
+	t.ExecuteTemplate(writer, "base-logged-in", nil)
 }
