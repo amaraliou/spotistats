@@ -7,6 +7,7 @@
     <script type="text/javascript" src="https://code.jquery.com/jquery-2.2.0.min.js"></script>
     <script type="text/javascript" src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
     <script type="text/javascript" src="/js/isotope.pkgd.min.js"></script>
+    <script type="text/javascript" src="../static/js/custom.js"></script>
     <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
     <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
     <link href="https://fonts.googleapis.com/css?family=Montserrat" rel="stylesheet">
@@ -21,20 +22,50 @@
             <div>
                 <div class="top-navbar-container">
                     <div class="top-navbar">
-                        <a href="#">All Time</a>
-                        <a href="#">Past 6 Months</a>
-                        <a href="#" class="active">Past Month</a>
+                        <a id="long-term" href="#" onclick="longTerm()">All Time</a>
+                        <a id="medium-term" href="#" onclick="mediumTerm()">Past 6 Months</a>
+                        <a id="short-term" href="#" onclick="shortTerm()" class="active">Past Month</a>
                     </div>
                     <h3 class="top-navbar-title">Top Tracks</h3>
                 </div>
             </div>
-            <div class="top-tracks">
+            <div class="top-tracks short-term">
                 {{range $i, $e := .shortTerm.Items}}
                     <div class="top-track-large">
                         <img src="{{ (index .Album.Images 1).URL }}" alt="Bruh">
                         <div class="top-track-info">
                             <h3 class="top-track-name-large">{{add $i}}. {{$e.Name}}</h3>
-                            <div class="top-track-artists">
+                            <div class="top-track-artists-large">
+                                {{range .Artists}}
+                                    <h3>{{.Name}}</h3>
+                                {{end}}
+                            </div>
+                        </div>
+                    </div>
+                {{end}}
+            </div>
+            <div class="top-tracks medium-term">
+                {{range $i, $e := .mediumTerm.Items}}
+                    <div class="top-track-large">
+                        <img src="{{ (index .Album.Images 1).URL }}" alt="Bruh">
+                        <div class="top-track-info">
+                            <h3 class="top-track-name-large">{{add $i}}. {{$e.Name}}</h3>
+                            <div class="top-track-artists-large">
+                                {{range .Artists}}
+                                    <h3>{{.Name}}</h3>
+                                {{end}}
+                            </div>
+                        </div>
+                    </div>
+                {{end}}
+            </div>
+            <div class="top-tracks long-term">
+                {{range $i, $e := .longTerm.Items}}
+                    <div class="top-track-large">
+                        <img src="{{ (index .Album.Images 1).URL }}" alt="Bruh">
+                        <div class="top-track-info">
+                            <h3 class="top-track-name-large">{{add $i}}. {{$e.Name}}</h3>
+                            <div class="top-track-artists-large">
                                 {{range .Artists}}
                                     <h3>{{.Name}}</h3>
                                 {{end}}
