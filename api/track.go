@@ -161,5 +161,6 @@ func GetRecentTracks(limit int, token string) (recentTracks RecentTrackList, err
 	r.Header.Add("Authorization", "Bearer "+token)
 
 	err = makeReq(r, &recentTracks)
+
 	return recentTracks, err
 }

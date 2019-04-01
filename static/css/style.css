@@ -269,6 +269,10 @@ div.top-track-large {
     width: 100%;
 }
 
+div.top-track-large:hover, div.top-artist-large:hover {
+    background-color: rgb(105,105,105, 0.2);
+}
+
 .top-track-large img {
     max-width: 160px;
     max-height: 160px;

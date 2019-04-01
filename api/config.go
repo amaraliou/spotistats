@@ -64,6 +64,7 @@ func configureOAuthClient(clientID, clientSecret string) *oauth2.Config {
 			ScopeUserTopRead,
 			ScopeUserReadCurrentlyPlaying,
 			ScopeUserReadPlaybackState,
+			ScopeUserReadRecentlyPlayed,
 		},
 		Endpoint: spotify.Endpoint,
 	}

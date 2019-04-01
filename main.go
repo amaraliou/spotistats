@@ -26,6 +26,7 @@ func main() {
 	http.HandleFunc("/", rootHandler)
 	http.HandleFunc("/top/tracks", HandleTopTracks)
 	http.HandleFunc("/top/artists", HandleTopArtists)
+	http.HandleFunc("/recent", HandleRecentTracks)
 	http.HandleFunc("/home", HandleHome)
 	http.HandleFunc("/login", api.HandleLoginRequest)
 	http.HandleFunc("/callback", api.CallbackHandler)
@@ -139,4 +140,35 @@ func HandleTopArtists(writer http.ResponseWriter, request *http.Request) {
 	}
 
 	t.ExecuteTemplate(writer, "topartists", data)
+}
+
+func HandleRecentTracks(writer http.ResponseWriter, request *http.Request) {
+	t, err := template.New("templates/recent.html").Funcs(
+		template.FuncMap{
+			"add": func(a int) int {
+				return a + 1
+			},
+		},
+	).ParseFiles("templates/recent.html", "templates/navbar.html")
+
+	if err != nil {
+		log.Fatal(err)
+	}
+
+	currentSession, err := api.SessionStore.Get(request, "spotistats")
+	if err != nil {
+		log.Fatal(err)
+	}
+
+	tok := currentSession.Values["oauth_token"].(string)
+	recentTracks, err := api.GetRecentTracks(50, tok)
+	if err != nil {
+		log.Fatal(err)
+	}
+
+	data := map[string]interface{}{
+		"tracks": recentTracks,
+	}
+
+	t.ExecuteTemplate(writer, "recent", data)
 }
