@@ -76,7 +76,7 @@ p.home-intro {
 .navbar {
   overflow: hidden;
   top: 0;
-  width: 100%;
+  width: 1400px;
   text-align: center;
   min-height: 25px;
   margin-top: 20px;
@@ -329,4 +329,73 @@ div.top-track-artists-large h3:last-of-type::after{
     border-top: 2px solid;
     border-color: #1DB954;
     padding-top: 20px;
+}
+
+@media only screen and (max-width: 1400px) {
+    .top-tracks {width: 1000px;}
+    .top-tracks-container {width: 1000px;}
+    .top-navbar-container {width: 1000px;}
+    .navbar {width: 1000px;}
+}
+
+@media only screen and (max-width: 1000px) {
+    .top-tracks {width: 700px;}
+    .top-tracks-container {width: 700px;}
+    .top-navbar-container {width: 700px;}
+    .navbar {width: 700px;}
+    .home-top-container {
+        flex-direction: column;
+    }
+}
+
+@media only screen and (max-width: 700px) {
+    .top-tracks {
+        width: 100%;
+        margin: 0;
+    }
+
+    .top-tracks-container {
+        width: 100%;
+    }
+
+    .top-navbar-container {width: 100%;}
+
+    .top-navbar a {
+        font-size: 12px;
+    }
+
+    .top-navbar a:first-of-type {
+        margin-left: 0;
+        padding-left: 0;
+    }
+
+    .top-navbar {
+        margin-left: 0;
+    }
+
+    .navbar {width: 100%;}
+
+    .navbar a {
+        font-size: 14px;
+    }
+
+    .top-track-name-large {
+        font-size: 13px;
+        margin-left: 20px;
+        margin-top: 5px;
+        margin-bottom: 5px;
+    }
+
+    .top-track-large img {
+        width: 80px;
+        height: 80px;
+    }
+
+    div.top-track-artists-large h3 {
+        font-size: 12px;
+    }
+
+    .top-track-artists-large {
+        margin-left: 20px;
+    }
 }
