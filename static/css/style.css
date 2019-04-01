@@ -82,7 +82,7 @@ p.home-intro {
   margin-top: 20px;
 }
 
-.top-tracks-container {
+.top-tracks-container .top-artists-container {
     display: flex;
     flex-direction: column;
     width: 1400px;
@@ -221,16 +221,37 @@ img.user-profile-pic {
     width: 450px;
 }
 
+.top-artist-large {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    width: 100%;
+}
+
 .top-artist h3 {
     font-size: 15px;
     margin: 10px 0px;
     margin-left: 25px;
 }
 
+.top-artist-large h3 {
+    font-size: 22px;
+    margin: 10px 0px;
+    margin-left: 50px;
+    font-weight: 600;
+}
+
 .top-artist img {
     width: 70px;
     height: 70px;
     border-radius: 35px;
+    margin: 10px;
+}
+
+.top-artist-large img {
+    max-width: 160px;
+    max-height: 160px;
+    border-radius: 80px;
     margin: 10px;
 }
 
@@ -319,7 +340,7 @@ div.top-track-artists-large h3:last-of-type::after{
     margin-left: 40px;
 }
 
-.top-tracks {
+.top-tracks, .top-artists {
     width: 1400px;
     margin: 15px;
     display: flex;
@@ -332,17 +353,15 @@ div.top-track-artists-large h3:last-of-type::after{
 }
 
 @media only screen and (max-width: 1400px) {
-    .top-tracks {width: 1000px;}
-    .top-tracks-container {width: 1000px;}
-    .top-navbar-container {width: 1000px;}
-    .navbar {width: 1000px;}
+    .top-tracks, .top-artists, .top-tracks-container, .top-artists-container, .top-navbar-container, .navbar {
+        width: 1000px;
+    }
 }
 
 @media only screen and (max-width: 1000px) {
-    .top-tracks {width: 700px;}
-    .top-tracks-container {width: 700px;}
-    .top-navbar-container {width: 700px;}
-    .navbar {width: 700px;}
+    .top-tracks, .top-artists, .top-tracks-container, .top-artists-container, .top-navbar-container, .navbar {
+        width: 700px;
+    }
     .home-top-container {
         flex-direction: column;
     }
@@ -354,7 +373,16 @@ div.top-track-artists-large h3:last-of-type::after{
         margin: 0;
     }
 
+    .top-artists {
+        width: 100%;
+        margin: 0;
+    }
+
     .top-tracks-container {
+        width: 100%;
+    }
+
+    .top-artists-container {
         width: 100%;
     }
 
@@ -386,10 +414,24 @@ div.top-track-artists-large h3:last-of-type::after{
         margin-bottom: 5px;
     }
 
+    .top-artist-large h3 {
+        font-size: 13px;
+        margin-left: 20px;
+        margin-top: 5px;
+        margin-bottom: 5px;
+    }
+
     .top-track-large img {
         width: 80px;
         height: 80px;
     }
+
+    .top-artist-large img {
+        width: 80px;
+        height: 80px;
+        border-radius: 40px;
+    }
+
 
     div.top-track-artists-large h3 {
         font-size: 12px;

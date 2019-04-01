@@ -1,0 +1,60 @@
+{{define "topartists"}}
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charget="utf-8">
+    <title>Spotistats - Top Artists</title>
+    <script type="text/javascript" src="https://code.jquery.com/jquery-2.2.0.min.js"></script>
+    <script type="text/javascript" src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="/js/isotope.pkgd.min.js"></script>
+    <script type="text/javascript" src="../static/js/custom.js"></script>
+    <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
+    <link href="https://fonts.googleapis.com/css?family=Montserrat" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="../static/css/style.css">
+</head>
+<body>
+    <div class="home-container">
+        <div class="navbar-row">
+            {{template "navbar" .}}
+        </div>
+        <div class="top-artists-container">
+            <div>
+                <div class="top-navbar-container">
+                    <div class="top-navbar">
+                        <a id="long-term" href="#" onclick="longTerm()">All Time</a>
+                        <a id="medium-term" href="#" onclick="mediumTerm()">Past 6 Months</a>
+                        <a id="short-term" href="#" onclick="shortTerm()" class="active">Past Month</a>
+                    </div>
+                    <h3 class="top-navbar-title">Top Artists</h3>
+                </div>
+            </div>
+            <div class="top-artists short-term">
+                {{range $i, $e := .shortTerm.Items}}
+                    <div class="top-artist-large">
+                        <img src="{{ (index .Images 1).URL }}" alt="Bruh">
+                        <h3>{{add $i}}. {{$e.Name}}</h3>
+                    </div>
+                {{end}}
+            </div>
+            <div class="top-artists medium-term">
+                {{range $i, $e := .mediumTerm.Items}}
+                    <div class="top-artist-large">
+                        <img src="{{ (index .Images 1).URL }}" alt="Bruh">
+                        <h3>{{add $i}}. {{$e.Name}}</h3>
+                    </div>
+                {{end}}
+            </div>
+            <div class="top-artists long-term">
+                {{range $i, $e := .longTerm.Items}}
+                    <div class="top-artist-large">
+                        <img src="{{ (index .Images 1).URL }}" alt="Bruh">
+                        <h3>{{add $i}}. {{$e.Name}}</h3>
+                    </div>
+                {{end}}
+            </div>
+        </div>
+    </div>
+</body>
+</html>
+{{end}}

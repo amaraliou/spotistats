@@ -1,11 +1,12 @@
 $(document).ready(function(){
     $(".top-track-large").hide();
-    $(".medium-term.top-tracks").hide();
-    $(".long-term.top-tracks").hide();
+    $(".top-artist-large").hide();
+    $("div.medium-term").hide();
+    $("div.long-term").hide();
 });
 
 $(window).load(function(){
-    $("div.top-track-large").each(function(index) {
+    $("div.top-track-large, div.top-artist-large").each(function(index) {
         $(this).delay(100*index).fadeIn(200);
     });
 })
@@ -15,9 +16,9 @@ function shortTerm(){
     $('#medium-term').removeClass("active");
     $('#short-term').addClass("active");
 
-    $("div.medium-term.top-tracks").hide();
-    $("div.long-term.top-tracks").hide();
-    $("div.short-term.top-tracks").show();
+    $("div.medium-term").hide();
+    $("div.long-term").hide();
+    $("div.short-term").show();
 }
 
 function mediumTerm(){
@@ -25,9 +26,9 @@ function mediumTerm(){
     $('#short-term').removeClass("active");
     $('#medium-term').addClass("active");
 
-    $("div.short-term.top-tracks").hide();
-    $("div.long-term.top-tracks").hide();
-    $("div.medium-term.top-tracks").show();
+    $("div.short-term").hide();
+    $("div.long-term").hide();
+    $("div.medium-term").show();
 }
 
 function longTerm(){
@@ -35,7 +36,7 @@ function longTerm(){
     $('#short-term').removeClass("active");
     $('#long-term').addClass("active");
 
-    $("div.short-term.top-tracks").hide();
-    $("div.medium-term.top-tracks").hide();
-    $("div.long-term.top-tracks").show();
+    $("div.short-term").hide();
+    $("div.medium-term").hide();
+    $("div.long-term").show();
 }

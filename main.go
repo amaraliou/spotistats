@@ -25,6 +25,7 @@ func main() {
 	http.Handle("/static/", http.StripPrefix("/static/", http.FileServer(http.Dir("static"))))
 	http.HandleFunc("/", rootHandler)
 	http.HandleFunc("/top/tracks", HandleTopTracks)
+	http.HandleFunc("/top/artists", HandleTopArtists)
 	http.HandleFunc("/home", HandleHome)
 	http.HandleFunc("/login", api.HandleLoginRequest)
 	http.HandleFunc("/callback", api.CallbackHandler)
@@ -105,4 +106,37 @@ func HandleTopTracks(writer http.ResponseWriter, request *http.Request) {
 		"shortTerm":  allTopTracks.Short,
 	}
 	t.ExecuteTemplate(writer, "toptracks", data)
+}
+
+func HandleTopArtists(writer http.ResponseWriter, request *http.Request) {
+	t, err := template.New("templates/topartists.html").Funcs(
+		template.FuncMap{
+			"add": func(a int) int {
+				return a + 1
+			},
+		},
+	).ParseFiles("templates/topartists.html", "templates/navbar.html")
+
+	if err != nil {
+		log.Fatal(err)
+	}
+
+	currentSession, err := api.SessionStore.Get(request, "spotistats")
+	if err != nil {
+		log.Fatal(err)
+	}
+
+	tok := currentSession.Values["oauth_token"].(string)
+	allTopArtists, err := api.GetAllTopArtists(tok)
+	if err != nil {
+		log.Fatal(err)
+	}
+
+	data := map[string]interface{}{
+		"longTerm":   allTopArtists.Long,
+		"mediumTerm": allTopArtists.Medium,
+		"shortTerm":  allTopArtists.Short,
+	}
+
+	t.ExecuteTemplate(writer, "topartists", data)
 }
