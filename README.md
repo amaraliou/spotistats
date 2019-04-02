@@ -17,7 +17,9 @@
 - Homepage
 
 ![Homepage](screenshots/homepage.jpg "Homepage")
+![Homepage Mobile](screenshots/homepage-mobile.jpg "Homepage mobile")
 
 - Top Tracks page
 
-![Top Tracks](screenshots/toptracks-mobile.jpg "Top Tracks")
+![Top Tracks](screenshots/toptracks.jpg "Top Tracks")
+![Top Tracks Mobile](screenshots/toptracks-mobile.jpg "Top Tracks Mobile")
