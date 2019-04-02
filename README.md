@@ -19,5 +19,5 @@
 - Top Tracks page
 
 <p align="center">
-  <img src="https://github.com/amaraliou/spotistats/screenshots/toptracks-mobile.jpg" alt="Top Tracks"/>
+  <img src="https://github.com/amaraliou/spotistats/screenshots/toptracks-mobile.jpg?raw=true" alt="Top Tracks"/>
 </p>
