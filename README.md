@@ -18,4 +18,6 @@
 
 - Top Tracks page
 
-![Top Tracks](screenshots/toptracks-mobile.jpg "Top Tracks")
+<p align="center">
+  <img src="https://github.com/amaraliou/spotistats/screenshots/toptracks-mobile.jpg" alt="Top Tracks"/>
+</p>
