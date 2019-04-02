@@ -5,8 +5,10 @@
 - Modify how the token data is saved in the CookieStore
 - Find a way to refresh the token when expired
 - Make Login page responsive
-- Work on homepage
-- Create a responsive navbar template
+- Make an animation of the navbar on mobile (the plus button)
+- Finish the playlists, track, album and artists pages
+- Make more screenshots
+- Deploy on Heroku
 
 ## Screenshots
 
@@ -14,4 +16,4 @@
 ![Homepage](screenshots/homepage.jpg "Homepage")
 
 - Top Tracks page
-![Top Tracks](screenshots/toptracks.jpg "Top Tracks")
+![Top Tracks](screenshots/toptracks-mobile.jpg "Top Tracks")

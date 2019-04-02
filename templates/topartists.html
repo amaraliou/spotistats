@@ -10,10 +10,12 @@
     <script type="text/javascript" src="../static/js/custom.js"></script>
     <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
     <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css" integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">
     <link href="https://fonts.googleapis.com/css?family=Montserrat" rel="stylesheet">
     <link rel="stylesheet" type="text/css" href="../static/css/style.css">
 </head>
 <body>
+    {{template "floatbutton".}}
     <div class="home-container">
         <div class="navbar-row">
             {{template "navbar" .}}
@@ -31,7 +33,7 @@
             </div>
             <div class="top-artists short-term">
                 {{range $i, $e := .shortTerm.Items}}
-                    <div class="top-artist-large">
+                    <div class="top-artist-large short">
                         <img src="{{ (index .Images 1).URL }}" alt="Bruh">
                         <h3>{{add $i}}. {{$e.Name}}</h3>
                     </div>
@@ -39,7 +41,7 @@
             </div>
             <div class="top-artists medium-term">
                 {{range $i, $e := .mediumTerm.Items}}
-                    <div class="top-artist-large">
+                    <div class="top-artist-large medium">
                         <img src="{{ (index .Images 1).URL }}" alt="Bruh">
                         <h3>{{add $i}}. {{$e.Name}}</h3>
                     </div>
@@ -47,7 +49,7 @@
             </div>
             <div class="top-artists long-term">
                 {{range $i, $e := .longTerm.Items}}
-                    <div class="top-artist-large">
+                    <div class="top-artist-large long">
                         <img src="{{ (index .Images 1).URL }}" alt="Bruh">
                         <h3>{{add $i}}. {{$e.Name}}</h3>
                     </div>

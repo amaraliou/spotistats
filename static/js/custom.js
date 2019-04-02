@@ -1,12 +1,15 @@
 $(document).ready(function(){
     $(".top-track-large").hide();
     $(".top-artist-large").hide();
+    $(".top-track").hide();
+    $(".top-artist").hide();
     $("div.medium-term").hide();
     $("div.long-term").hide();
+    $("a#short-term").click()
 });
 
 $(window).load(function(){
-    $("div.top-track-large, div.top-artist-large").each(function(index) {
+    $("div.top-track-large.recent-track, div.top-track, div.top-artist").each(function(index) {
         $(this).delay(100*index).fadeIn(200);
     });
 })
@@ -19,6 +22,9 @@ function shortTerm(){
     $("div.medium-term").hide();
     $("div.long-term").hide();
     $("div.short-term").show();
+    $("div.top-track-large.short, div.top-artist-large.short").each(function(index) {
+        $(this).delay(100*index).fadeIn(200);
+    });
 }
 
 function mediumTerm(){
@@ -29,6 +35,9 @@ function mediumTerm(){
     $("div.short-term").hide();
     $("div.long-term").hide();
     $("div.medium-term").show();
+    $("div.top-track-large.medium, div.top-artist-large.medium").each(function(index) {
+        $(this).delay(100*index).fadeIn(200);
+    });
 }
 
 function longTerm(){
@@ -39,4 +48,11 @@ function longTerm(){
     $("div.short-term").hide();
     $("div.medium-term").hide();
     $("div.long-term").show();
+    $("div.top-track-large.long, div.top-artist-large.long").each(function(index) {
+        $(this).delay(100*index).fadeIn(200);
+    });
+}
+
+function collapseBoi(){
+    $(".collapsed-navbar").toggle();
 }

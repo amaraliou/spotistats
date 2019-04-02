@@ -43,7 +43,7 @@ func rootHandler(w http.ResponseWriter, r *http.Request) {
 }
 
 func HandleHome(writer http.ResponseWriter, request *http.Request) {
-	t, err := template.ParseFiles("templates/homepage.html", "templates/navbar.html")
+	t, err := template.ParseFiles("templates/homepage.html", "templates/navbar.html", "templates/floatbutton.html")
 	if err != nil {
 		log.Fatalf("Could not parse template: %v", err)
 	}
@@ -85,7 +85,7 @@ func HandleTopTracks(writer http.ResponseWriter, request *http.Request) {
 				return a + 1
 			},
 		},
-	).ParseFiles("templates/toptracks.html", "templates/navbar.html")
+	).ParseFiles("templates/toptracks.html", "templates/navbar.html", "templates/floatbutton.html")
 	if err != nil {
 		log.Fatalf("Could not parse template: %v", err)
 	}
@@ -116,7 +116,7 @@ func HandleTopArtists(writer http.ResponseWriter, request *http.Request) {
 				return a + 1
 			},
 		},
-	).ParseFiles("templates/topartists.html", "templates/navbar.html")
+	).ParseFiles("templates/topartists.html", "templates/navbar.html", "templates/floatbutton.html")
 
 	if err != nil {
 		log.Fatal(err)
@@ -149,7 +149,7 @@ func HandleRecentTracks(writer http.ResponseWriter, request *http.Request) {
 				return a + 1
 			},
 		},
-	).ParseFiles("templates/recent.html", "templates/navbar.html")
+	).ParseFiles("templates/recent.html", "templates/navbar.html", "templates/floatbutton.html")
 
 	if err != nil {
 		log.Fatal(err)
@@ -161,13 +161,13 @@ func HandleRecentTracks(writer http.ResponseWriter, request *http.Request) {
 	}
 
 	tok := currentSession.Values["oauth_token"].(string)
-	recentTracks, err := api.GetRecentTracks(50, tok)
+	recentFullTracks, err := api.GetRecentFullTracks(50, tok)
 	if err != nil {
 		log.Fatal(err)
 	}
 
 	data := map[string]interface{}{
-		"tracks": recentTracks,
+		"tracks": recentFullTracks,
 	}
 
 	t.ExecuteTemplate(writer, "recent", data)

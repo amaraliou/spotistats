@@ -3,35 +3,37 @@
 <html>
 <head>
     <meta charget="utf-8">
-    <title>Spotistats - Top Tracks</title>
+    <title>Spotistats - Recent Tracks</title>
     <script type="text/javascript" src="https://code.jquery.com/jquery-2.2.0.min.js"></script>
     <script type="text/javascript" src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
     <script type="text/javascript" src="/js/isotope.pkgd.min.js"></script>
     <script type="text/javascript" src="../static/js/custom.js"></script>
     <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
     <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css" integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">
     <link href="https://fonts.googleapis.com/css?family=Montserrat" rel="stylesheet">
     <link rel="stylesheet" type="text/css" href="../static/css/style.css">
 </head>
 <body>
+    {{template "floatbutton".}}
     <div class="home-container">
         <div class="navbar-row">
             {{template "navbar" .}}
         </div>
         <div class="top-tracks-container">
             <div>
-                <div class="top-navbar-container">
+                <div class="top-navbar-container recent">
                     <h3 class="top-navbar-title">Recent Tracks</h3>
                 </div>
             </div>
             <div class="top-tracks">
-                {{range $i, $e := .tracks.Items}}
-                    <div class="top-track-large">
-                        <img src="" alt="Bruh"> <!--" {{ (index .Track.Images 1).URL }} " FIX THIS FOR IMAGES-->
+                {{range $i, $e := .tracks}}
+                    <div class="top-track-large recent-track">
+                        <img src="{{(index $e.Album.Images 1).URL}}" alt="Bruh">
                         <div class="top-track-info">
-                            <h3 class="top-track-name-large">{{add $i}}. {{$e.Track.Name}}</h3>
+                            <h3 class="top-track-name-large">{{add $i}}. {{$e.Name}}</h3>
                             <div class="top-track-artists-large">
-                                {{range $e.Track.Artists}}
+                                {{range $e.Artists}}
                                     <h3>{{.Name}}</h3>
                                 {{end}}
                             </div>

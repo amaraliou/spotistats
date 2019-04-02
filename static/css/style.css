@@ -133,6 +133,10 @@ p.home-intro {
     font-weight: bold;
 }
 
+.recent {
+    flex-direction: row-reverse;
+}
+
 .navbar a {
   display: inline;
   color: white;
@@ -356,6 +360,65 @@ div.top-track-artists-large h3:last-of-type::after{
     padding-top: 20px;
 }
 
+.float{
+	position:fixed;
+	width:60px;
+	height:60px;
+	bottom:40px;
+	right:40px;
+	background-color: rgb(23, 233, 97);
+	color:#FFF;
+	border-radius:50px;
+	text-align:center;
+}
+
+.collapsed-navbar {
+    position:fixed;
+	bottom:120px;
+    right:40px;
+    text-align:right;
+    display: none;
+}
+
+.collapsed-navbar a {
+    display: block;
+    color: white;
+    text-decoration: none;
+    padding: 10px 10px;
+    font-size: 17px;
+    font-weight: bold;
+    outline: none;
+}
+
+.float:hover, a.float:hover{
+    background-color:#1DB954;
+    color: #FFF;
+}
+
+.float:active, a.float:active {
+    color: #FFF;
+}
+
+a.float {
+    outline: none;
+    display: none;
+}
+
+.float i {
+    width: 26px;
+    height: 30px;
+    margin: 15px 17px;
+    font-size: 30px;
+}
+
+.float i:hover {
+    color: #FFF;
+}
+
+.float i:active {
+    color: #FFF;
+}
+
 @media only screen and (max-width: 1400px) {
     .top-tracks, .top-artists, .top-tracks-container, .top-artists-container, .top-navbar-container, .navbar {
         width: 1000px;
@@ -363,6 +426,14 @@ div.top-track-artists-large h3:last-of-type::after{
 }
 
 @media only screen and (max-width: 1000px) {
+    div.navbar, div.navbar-row {
+        display: none;
+    }
+
+    a.float {
+        display: block;
+    }
+
     .top-tracks, .top-artists, .top-tracks-container, .top-artists-container, .top-navbar-container, .navbar {
         width: 700px;
     }

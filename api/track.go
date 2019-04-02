@@ -1,6 +1,7 @@
 package api
 
 import (
+	"log"
 	"net/url"
 	"strconv"
 	"strings"
@@ -163,4 +164,23 @@ func GetRecentTracks(limit int, token string) (recentTracks RecentTrackList, err
 	err = makeReq(r, &recentTracks)
 
 	return recentTracks, err
+}
+
+func GetRecentFullTracks(limit int, token string) (recentFullTracks []FullTrack, err error) {
+
+	recentTracks, err := GetRecentTracks(limit, token)
+	if err != nil {
+		log.Fatal(err)
+	}
+
+	for _, recentTrackItem := range recentTracks.Items {
+		id := recentTrackItem.Track.ID
+		fullTrack, err := GetTrack(id, token)
+		if err != nil {
+			log.Fatal(err)
+		}
+		recentFullTracks = append(recentFullTracks, fullTrack)
+	}
+
+	return recentFullTracks, err
 }
