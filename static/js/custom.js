@@ -54,5 +54,10 @@ function longTerm(){
 }
 
 function collapseBoi(){
-    $(".collapsed-navbar").toggle();
+    //$(".collapsed-navbar").toggle();
+    if($(".collapsed-navbar").css('display') == 'none'){
+        $(".collapsed-navbar").fadeIn(200);
+    } else {
+        $(".collapsed-navbar").fadeOut(200);
+    }
 }

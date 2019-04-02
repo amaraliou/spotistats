@@ -409,13 +409,14 @@ a.float {
     height: 30px;
     margin: 15px 17px;
     font-size: 30px;
-}
-
-.float i:hover {
     color: #FFF;
 }
 
-.float i:active {
+i:hover {
+    color: #FFF;
+}
+
+i:active {
     color: #FFF;
 }
 
