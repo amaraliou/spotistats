@@ -56,8 +56,11 @@ function longTerm(){
 function collapseBoi(){
     //$(".collapsed-navbar").toggle();
     if($(".collapsed-navbar").css('display') == 'none'){
+        $(".float").css("transform","rotate(45deg)");
         $(".collapsed-navbar").fadeIn(200);
     } else {
+        $(".float").css("transform","");
         $(".collapsed-navbar").fadeOut(200);
     }
 }
+

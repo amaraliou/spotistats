@@ -119,7 +119,7 @@ func GetTrack(trackID string, token string) (track FullTrack, err error) {
 	return track, err
 }
 
-func GetMultipleTracks(token string, trackIDs ...string) (tracks FullTracks, err error) {
+func GetMultipleTracks(token string, trackIDs []string) (tracks FullTracks, err error) {
 	IDs := strings.Join(trackIDs, ",")
 	r := buildReq("GET", BaseURL+"tracks/?ids="+IDs, nil, nil)
 	r.Header.Add("Authorization", "Bearer "+token)

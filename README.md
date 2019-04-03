@@ -10,6 +10,7 @@
 - [ ] Add loading/progress bar
 - [ ] Finish the playlists, track, album and artists pages
 - [ ] Make more screenshots
+- [ ] Add durations and/or albums to track divs
 - [ ] Deploy on Heroku
 
 ## Screenshots

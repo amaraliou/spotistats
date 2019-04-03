@@ -384,7 +384,7 @@ div.top-track-artists-large h3:last-of-type::after{
     display: block;
     color: white;
     text-decoration: none;
-    padding: 10px 10px;
+    padding: 10px 0px;
     font-size: 17px;
     font-weight: bold;
     outline: none;
